@@ -19,5 +19,5 @@
   function sendOrder(commande){const orders=read(ORDERS);orders.unshift(commande);save(ORDERS,orders);return Promise.resolve(commande)}
   function newOrder(customer){const items=cart(),t=totals(items);return {id:'BR-'+Date.now().toString().slice(-6),date:new Date().toISOString(),heure:new Date().toLocaleTimeString('fr-MA',{hour:'2-digit',minute:'2-digit'}),client:customer,products:items,total:t.total,quantity:t.count,status:'NOUVEAU',note:document.querySelector('[name=orderNote]')?.value||''}}
   window.BrimoOrder={add,cart,setCart,totals,money,price,orderControls,renderCart,sendOrder,newOrder,orders:()=>read(ORDERS),customer:()=>read(CUSTOMER),saveCustomer:v=>save(CUSTOMER,v,true)};window.sendOrder=sendOrder;
-  document.addEventListener('DOMContentLoaded',()=>{if(/\/(?:index|cart)\.html$/i.test(location.pathname)||/\/$/.test(location.pathname))ensureFab();renderCart()});
+  document.addEventListener('DOMContentLoaded',()=>{if(document.querySelector('[data-cart]'))document.body.classList.add('cart-page');if(/\/(?:index|cart)\.html$/i.test(location.pathname)||/\/$/.test(location.pathname))ensureFab();renderCart()});
 })();

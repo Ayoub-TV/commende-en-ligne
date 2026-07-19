@@ -55,14 +55,16 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      padding-bottom: 20px;
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
     .bottom-orange-bar {
       position: fixed;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: env(safe-area-inset-bottom);
       height: 3px;
       background: linear-gradient(90deg, transparent, rgba(233, 118, 34, 0.45), transparent);
       z-index: 300;
@@ -1391,6 +1393,35 @@
     body[dir="rtl"] .price-pill {
       right: auto;
       left: auto;
+    }
+
+    /* Correctifs responsive : préserver les proportions sur très petits écrans. */
+    @media (max-width: 460px) {
+      .page-shell { width: calc(100% - 20px); }
+      .site-header { width: calc(100% - 20px); }
+      .menu-inner { padding: 14px 0 24px; }
+      .section-heading { gap: 7px; margin: 18px 0 14px; }
+      .section-heading__title { font-size: 1.08rem; }
+      .menu-card { gap: 10px; padding: 10px; }
+      .menu-card__media { width: 68px; height: 68px; min-width: 68px; }
+      .menu-card__top { gap: 8px; }
+      .menu-card__name, .price-inline { font-size: .88rem; }
+      .menu-card__desc { font-size: .76rem; }
+      .menu-card__option { padding: 6px 9px; border-radius: 12px; font-size: .68rem; }
+      .menu-price-row { flex-wrap: wrap; gap: 7px; padding: 9px 0; }
+      .menu-price-row .menu-order-controls { width: 100%; justify-content: flex-start; }
+      .menu-order-controls { flex-wrap: wrap; justify-content: flex-start; }
+    }
+
+    @media (max-width: 340px) {
+      .site-header { min-height: 58px; padding: 7px; }
+      .brand__mark { width: 34px; height: 34px; }
+      .brand__name { font-size: .68rem; }
+      .brand__tagline { display: none; }
+      .header-cta__phone { font-size: .61rem; }
+      .menu-card { flex-wrap: wrap; }
+      .menu-card__body { min-width: calc(100% - 78px); }
+      .menu-card__option { max-width: 100%; }
     }
   </style>
 </head>
