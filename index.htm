@@ -1,0 +1,3946 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BRIMO CHICKEN</title>
+  <meta
+    name="description"
+    content="BRIMO CHICKEN, commandez vos burgers, tacos, wraps, menus familiaux et poulet frit a Casablanca."
+  />
+  <meta name="theme-color" content="#e97622" />
+  <link
+    rel="icon"
+    href="logo brimochicken.png"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Stack+Sans+Headline:wght@200..700&amp;family=Tajawal:wght@400;500;700&amp;display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --accent: #e97622;
+      --accent-dark: #c45f15;
+      --accent-soft: #fff1e5;
+      --accent-strong: #8d3f09;
+      --fresh: #37b98b;
+      --fresh-soft: #effcf5;
+      --berry: #f29a68;
+      --berry-soft: #fff4ec;
+      --text: #2d2d2d;
+      --text-muted: #6b6b6b;
+      --bg-page: #fff9f4;
+      --bg-shell: linear-gradient(180deg, #fff7ef 0%, #fffdf9 34%, #fff4e8 100%);
+      --white: #fff;
+      --line: rgba(141, 63, 9, 0.12);
+      --shadow: 0 14px 38px rgba(71, 39, 14, 0.08);
+      --radius-card: 18px;
+      --radius-cat: 22px;
+    }
+
+    .stack-sans-headline-uniquifier {
+      font-family: "Stack Sans Headline", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, sans-serif;
+      background: var(--bg-shell);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      padding-bottom: 20px;
+    }
+
+    .bottom-orange-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 14px;
+      background: var(--accent);
+      z-index: 300;
+      box-shadow: 0 -4px 14px rgba(233, 118, 34, 0.22);
+    }
+
+    .page-shell {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* ——— Header (shared) ——— */
+    .site-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      width: min(1240px, calc(100% - 32px));
+      min-height: 104px;
+      margin: 16px auto 0;
+      position: sticky;
+      top: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      z-index: 100;
+      box-shadow: 0 18px 40px rgba(88, 54, 17, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-right: 0;
+      border-right: none;
+      margin-right: 0;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .brand > div {
+      min-width: 0;
+    }
+
+    .brand__mark {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(233, 118, 34, 0.22);
+    }
+
+    .brand__mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      display: block;
+    }
+
+    .brand__name {
+      font-weight: 700;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .brand__tagline {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .header-cta {
+      justify-self: end;
+      text-align: right;
+      min-width: 0;
+    }
+
+    .header-cta__row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .header-cta__row > div {
+      min-width: 0;
+    }
+
+    .header-cta__icon {
+      width: 40px;
+      height: 40px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .header-cta__title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .header-cta__phone {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 2px;
+      overflow-wrap: anywhere;
+    }
+
+    .header-cta__phone a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .header-cta__phone a:hover {
+      text-decoration: underline;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      justify-self: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .lang-switcher__icon {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #f5ede6;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      background: #f5ede6;
+      border-radius: 999px;
+    }
+
+    .lang-switcher__btn {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-switcher__btn.is-active {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn-back {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(233, 118, 34, 0.15);
+      color: var(--accent);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 4px;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover {
+      background: rgba(233, 118, 34, 0.28);
+    }
+
+    .header-with-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ——— Categories view ——— */
+    #view-categories .site-header {
+      margin-bottom: 18px;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top left, rgba(233, 118, 34, 0.18), transparent 34%),
+        linear-gradient(135deg, #fff8f1 0%, #fff1e3 100%);
+      border: 1px solid rgba(233, 118, 34, 0.16);
+      border-radius: 34px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 26px;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(233, 118, 34, 0.12);
+      color: var(--accent-strong);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero__title {
+      margin-top: 18px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      font-weight: 800;
+      max-width: 10ch;
+    }
+
+    .hero__lead {
+      margin-top: 14px;
+      max-width: 720px;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+
+    .hero__stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .hero__stat {
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(233, 118, 34, 0.14);
+      border-radius: 20px;
+      padding: 16px 18px;
+    }
+
+    .hero__stat strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--accent-strong);
+      margin-bottom: 4px;
+    }
+
+    .hero__stat span {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .categories-title {
+      text-align: left;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      padding: 0 6px;
+      margin-bottom: 20px;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0 0 100px;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    @media (min-width: 1200px) {
+      .cat-grid {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 0 100px;
+      }
+    }
+
+    .cat-card {
+      aspect-ratio: 4 / 3;
+      max-height: 180px;
+    }
+
+    @media (max-width: 960px) {
+      .site-header {
+        width: min(1240px, calc(100% - 24px));
+        min-height: 92px;
+        padding: 12px 16px;
+        gap: 12px;
+      }
+
+      .brand__mark {
+        width: 78px;
+        height: 78px;
+        font-size: 12px;
+      }
+
+      .brand__name {
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
+      }
+
+      .header-cta__icon {
+        width: 34px;
+        height: 34px;
+      }
+
+      .header-cta__title {
+        font-size: 0.78rem;
+      }
+
+      .header-cta__phone {
+        font-size: 0.86rem;
+      }
+
+      .header-cta__row {
+        gap: 8px;
+      }
+
+      .categories-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .hero {
+        padding: 26px 22px;
+      }
+
+      .hero__stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+        min-height: 78px;
+        width: min(1240px, calc(100% - 18px));
+        padding: 12px;
+        gap: 8px;
+        top: 8px;
+        border-radius: 24px;
+      }
+
+      .brand {
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .header-with-back {
+        min-width: 0;
+      }
+
+      .brand__mark {
+        width: 48px;
+        height: 48px;
+        font-size: 11px;
+        flex-shrink: 0;
+      }
+
+      .brand__name {
+        font-size: 0.95rem;
+        letter-spacing: 0.03em;
+        line-height: 1.15;
+      }
+
+      .brand__tagline {
+        font-size: 0.64rem;
+        letter-spacing: 0.12em;
+      }
+
+      .header-cta {
+        justify-self: end;
+        width: auto;
+        text-align: right;
+      }
+
+      .header-cta__row {
+        gap: 6px;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .header-cta__icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .header-cta__title {
+        display: block;
+        font-size: 0.7rem;
+        line-height: 1.1;
+      }
+
+      .header-cta__phone {
+        font-size: 0.8rem;
+        margin-top: 0;
+      }
+
+      .header-cta__phone a {
+        white-space: nowrap;
+      }
+
+      .btn-back {
+        width: 34px;
+        height: 34px;
+        margin-right: 0;
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 0 110px;
+      }
+
+      .cat-card {
+        max-height: 170px;
+      }
+
+      .cat-card__label {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .site-header {
+        min-height: 72px;
+        padding: 8px 10px;
+        width: calc(100% - 12px);
+        margin-top: 8px;
+        border-radius: 20px;
+      }
+
+      .brand__mark {
+        width: 42px;
+        height: 42px;
+        font-size: 10px;
+      }
+
+      .brand__name {
+        font-size: 0.82rem;
+      }
+
+      .brand__tagline {
+        font-size: 0.58rem;
+        letter-spacing: 0.08em;
+      }
+
+      .header-with-back {
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .header-cta {
+        justify-self: end;
+        text-align: right;
+      }
+
+      .header-cta__icon {
+        display: none;
+      }
+
+      .header-cta__title {
+        font-size: 0.62rem;
+      }
+
+      .header-cta__phone {
+        font-size: 0.72rem;
+        line-height: 1.15;
+      }
+
+      .cat-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 12px 120px;
+      }
+
+      .cat-card {
+        max-height: 150px;
+      }
+
+      .categories-title {
+        font-size: 1.15rem;
+      }
+
+      .page-shell {
+        width: min(1240px, calc(100% - 18px));
+      }
+
+    }
+
+    @media (max-width: 380px) {
+      .site-header {
+        min-height: 64px;
+        padding: 8px;
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .brand {
+        gap: 6px;
+      }
+
+      .brand__mark {
+        width: 38px;
+        height: 38px;
+        font-size: 9px;
+      }
+
+      .brand__name {
+        font-size: 0.74rem;
+        letter-spacing: 0.02em;
+      }
+
+      .brand__tagline {
+        font-size: 0.54rem;
+        letter-spacing: 0.06em;
+      }
+
+      .header-cta__phone {
+        font-size: 0.66rem;
+      }
+
+      .header-cta__title {
+        font-size: 0.56rem;
+      }
+
+      .btn-back {
+        width: 30px;
+        height: 30px;
+      }
+
+      .cat-grid {
+        gap: 10px;
+        padding: 0 0 120px;
+      }
+
+      .cat-card {
+        max-height: 130px;
+      }
+
+      .cat-card__label {
+        font-size: 0.95rem;
+        padding: 20px 10px;
+      }
+    }
+
+    .cat-card {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-cat);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      display: block;
+      width: 100%;
+      padding: 0;
+      background: #ddd;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .cat-card__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cat-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28, 16, 8, 0.82), rgba(28, 16, 8, 0.18));
+    }
+
+    .cat-card__label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      font-family: "Poppins", "Stack Sans Headline", sans-serif;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ——— Menu view ——— */
+    #view-menu {
+      display: none;
+      background: var(--bg-page);
+      min-height: 100vh;
+      padding-bottom: 88px;
+    }
+
+    #view-menu.is-visible {
+      display: block;
+    }
+
+    #view-categories.hidden {
+      display: none;
+    }
+
+    .menu-header-bar {
+      background: transparent;
+    }
+
+    .menu-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 0 28px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      margin-top: 28px;
+    }
+
+    .section-heading:first-child {
+      margin-top: 0;
+    }
+
+    .section-heading__emoji {
+      font-size: 1.4rem;
+    }
+
+    .section-heading__title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-heading__sub {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      width: 100%;
+      margin-top: -2px;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 0;
+    }
+
+    @media (max-width: 900px) {
+      .items-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 14px 100px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .menu-card {
+        padding: 16px 76px 16px 16px;
+        min-height: 68px;
+      }
+
+      .menu-card__name {
+        font-size: 0.9rem;
+      }
+
+      .menu-card__desc {
+        font-size: 0.7rem;
+        padding: 8px 10px;
+      }
+
+      .menu-card__option {
+        font-size: 0.68rem;
+        padding: 7px 10px;
+      }
+
+      .price-pill {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+      }
+
+      .section-heading__title {
+        font-size: 1.05rem;
+      }
+
+      .section-heading__emoji {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .menu-card {
+        padding: 14px 70px 14px 14px;
+        min-height: 64px;
+        gap: 8px;
+      }
+
+      .menu-card__name {
+        font-size: 0.85rem;
+      }
+
+      .menu-card__desc {
+        font-size: 0.68rem;
+        padding: 7px 9px;
+        margin-top: 0;
+      }
+
+      .menu-card__option {
+        font-size: 0.66rem;
+        padding: 6px 9px;
+      }
+
+      .price-pill {
+        font-size: 0.72rem;
+        padding: 7px 11px;
+        right: -4px;
+      }
+
+      .section-heading {
+        margin-top: 24px;
+        margin-bottom: 14px;
+        gap: 8px;
+      }
+
+      .section-heading__emoji {
+        font-size: 1.2rem;
+      }
+
+      .section-heading__title {
+        font-size: 1rem;
+      }
+
+      .section-heading__sub {
+        font-size: 0.75rem;
+      }
+
+      .menu-inner {
+        padding: 16px 14px 24px;
+      }
+
+      #view-menu {
+        padding-bottom: 76px;
+      }
+
+      .hero__eyebrow {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+      }
+
+      .hero__title {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        margin-top: 16px;
+      }
+
+      .hero__lead {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .items-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-card {
+        padding: 12px 66px 12px 12px;
+        min-height: 58px;
+        gap: 6px;
+      }
+
+      .menu-card__name {
+        font-size: 0.82rem;
+      }
+
+      .menu-card__desc {
+        font-size: 0.65rem;
+        padding: 6px 8px;
+      }
+
+      .menu-card__option {
+        font-size: 0.63rem;
+        padding: 5px 8px;
+      }
+
+      .menu-card__actions {
+        gap: 6px;
+      }
+
+      .menu-card__preview-btn {
+        font-size: 0.68rem;
+        padding: 6px 10px;
+      }
+
+      .price-pill {
+        font-size: 0.68rem;
+        padding: 6px 10px;
+        right: -3px;
+      }
+
+      .cart-icon-btn {
+        width: 30px;
+        height: 30px;
+        flex: 0 0 30px;
+      }
+
+      .cart-icon-btn svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .special-block {
+        padding: 14px;
+        margin-top: 12px;
+      }
+
+      .special-block h4 {
+        font-size: 0.9rem;
+      }
+
+      .special-block .flavors {
+        font-size: 0.75rem;
+        gap: 6px;
+      }
+
+      .flavor-tag {
+        padding: 3px 10px;
+        font-size: 0.65rem;
+      }
+
+      .price-pair {
+        gap: 6px;
+      }
+
+      .price-row span:not(.pill-inline) {
+        font-size: 0.82rem;
+      }
+
+      .price-row .pill-inline {
+        font-size: 0.75rem;
+        padding: 7px 12px;
+      }
+
+      .section-heading {
+        margin-top: 22px;
+        margin-bottom: 12px;
+        gap: 6px;
+      }
+
+      .section-heading__emoji {
+        font-size: 1.1rem;
+      }
+
+      .section-heading__title {
+        font-size: 0.95rem;
+      }
+
+      .section-heading__sub {
+        font-size: 0.72rem;
+      }
+
+      .menu-inner {
+        padding: 14px 12px 20px;
+      }
+
+      #view-menu {
+        padding-bottom: 70px;
+      }
+
+      .hero {
+        padding: 20px 18px;
+        margin-bottom: 22px;
+        border-radius: 28px;
+      }
+
+      .hero__eyebrow {
+        font-size: 0.72rem;
+        padding: 5px 11px;
+      }
+
+      .hero__title {
+        font-size: clamp(1.35rem, 2.8vw, 2rem);
+        margin-top: 14px;
+      }
+
+      .hero__lead {
+        font-size: 0.85rem;
+        line-height: 1.55;
+        margin-top: 10px;
+      }
+
+      .hero__stats {
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .hero__stat {
+        padding: 12px 14px;
+        border-radius: 16px;
+      }
+
+      .hero__stat strong {
+        font-size: 0.95rem;
+      }
+
+      .hero__stat span {
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .cart-float {
+        right: 12px;
+        bottom: 20px;
+        width: 62px;
+        height: 62px;
+        padding: 6px 0;
+        gap: 3px;
+        font-size: 0.8rem;
+      }
+
+      .cart-float svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .cart-count {
+        padding: 0;
+        font-size: 0.95rem;
+        min-width: auto;
+      }
+
+      #view-confirmation main.page-shell {
+        min-height: calc(100vh - 110px);
+        padding: 16px 12px 24px;
+      }
+
+      #view-confirmation .confirmation-message {
+        font-size: 1.1rem;
+        padding: 0 8px;
+        line-height: 1.3;
+      }
+
+      .cart-panel {
+        width: min(100%, 380px);
+        padding: 12px;
+        border-radius: 18px;
+        max-height: min(86vh, 680px);
+      }
+
+      .cart-panel__title {
+        font-size: 0.95rem;
+      }
+
+      .cart-close {
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+      }
+
+      .cart-item {
+        padding: 8px;
+        gap: 6px;
+      }
+
+      .cart-item__name {
+        font-size: 0.8rem;
+      }
+
+      .cart-item__meta {
+        font-size: 0.7rem;
+      }
+
+      .cart-total {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+      }
+
+      .cart-remove {
+        width: 26px;
+        height: 26px;
+        font-size: 0.95rem;
+      }
+
+      .cart-added-pop {
+        right: 58px;
+        bottom: 30px;
+        font-size: 0.7rem;
+        padding: 6px 10px;
+      }
+
+      .cart-form {
+        gap: 7px;
+        padding-top: 10px;
+      }
+
+      .cart-form label {
+        font-size: 0.7rem;
+        gap: 4px;
+      }
+
+      .delivery-type {
+        padding: 10px 12px;
+        margin-top: 2px;
+        border-radius: 14px;
+      }
+
+      .delivery-type legend {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+      }
+
+      .delivery-type__options {
+        gap: 7px;
+      }
+
+      .delivery-option {
+        gap: 5px;
+        padding: 8px;
+        font-size: 0.82rem;
+        border-radius: 10px;
+      }
+
+      .delivery-option input {
+        width: 16px;
+        height: 16px;
+      }
+
+      .delivery-option span {
+        font-size: 0.8rem;
+      }
+
+      .cart-form input {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-radius: 9px;
+      }
+
+      .cart-form input::placeholder {
+        font-size: 0.8rem;
+      }
+
+      .cart-submit {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+        margin-top: 2px;
+        border-radius: 999px;
+      }
+
+      .cart-status {
+        font-size: 0.75rem;
+        min-height: 16px;
+      }
+
+      .item-config-panel {
+        width: min(100%, 360px);
+        padding: 12px;
+        border-radius: 18px;
+        max-height: min(78vh, 560px);
+      }
+
+      .item-config-title {
+        font-size: 0.9rem;
+      }
+
+      .item-config-subtitle {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+      }
+
+      .item-config-options {
+        gap: 6px;
+      }
+
+      .item-config-choice,
+      .item-config-action {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-radius: 10px;
+      }
+
+      .item-config-choice span,
+      .item-config-action span {
+        font-size: 0.78rem;
+      }
+
+      .item-config-actions {
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .item-config-cancel {
+        padding: 8px 11px;
+        font-size: 0.9rem;
+        margin-top: 6px;
+      }
+
+      .image-modal {
+        padding: 12px;
+      }
+
+      .image-modal__dialog {
+        width: min(100%, 85vw);
+        border-radius: 18px;
+      }
+
+      .image-modal__close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+        top: 8px;
+        right: 8px;
+      }
+
+      .image-modal__img {
+        max-height: 60vh;
+      }
+
+      .image-modal__caption {
+        padding: 10px 12px 12px;
+        font-size: 0.82rem;
+      }
+    }
+
+    .menu-card {
+      position: relative;
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 18px 86px 18px 18px;
+      min-height: 72px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .menu-card--family-box {
+      justify-content: flex-start;
+      padding: 18px 72px 18px 16px;
+      min-height: auto;
+    }
+
+    .menu-card--family-box .menu-card__desc {
+      margin-bottom: 0;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .menu-card__name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      padding-right: 4px;
+      margin-bottom: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .menu-card__desc {
+      font-size: 0.72rem;
+      margin-top: 0;
+      color: #515151;
+      line-height: 1.55;
+      margin-bottom: 0;
+      background: #fff7ef;
+      border-left: 4px solid rgba(233, 118, 34, 0.45);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .menu-card__option {
+      font-size: 0.72rem;
+      color: #9a4b10;
+      margin-top: 0;
+      font-weight: 700;
+      line-height: 1.45;
+      background: rgba(233, 118, 34, 0.12);
+      border: 1px dashed rgba(233, 118, 34, 0.45);
+      border-radius: 999px;
+      padding: 8px 12px;
+      display: inline-flex;
+      align-self: flex-start;
+      max-width: 100%;
+    }
+
+    .menu-card__option + .menu-card__option {
+      margin-top: 0;
+    }
+
+    .menu-card__actions {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-self: center;
+      margin-top: 4px;
+    }
+
+    .menu-card__preview-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: transparent;
+      color: #111111;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #111111;
+      box-shadow: none;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .menu-card__preview-icon {
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+
+    .cart-icon-btn,
+    .cart-float {
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ff9a3d, #f37a24);
+      color: var(--white);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(233, 118, 34, 0.34);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .cart-icon-btn {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+    }
+
+    .cart-icon-btn:hover,
+    .cart-float:hover {
+      background: linear-gradient(145deg, #ffad62, var(--accent));
+      transform: translateY(-2px);
+    }
+
+    .cart-icon-btn svg,
+    .cart-float svg {
+      width: 19px;
+      height: 19px;
+      stroke: currentColor;
+    }
+
+    .cart-icon-btn svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .menu-card__preview-btn.is-transparent {
+      background: transparent;
+      color: rgba(17, 17, 17, 0.72);
+      border-color: rgba(17, 17, 17, 0.24);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .menu-card__preview-btn:hover {
+      background: rgba(17, 17, 17, 0.06);
+      border-color: #000000;
+      color: #000000;
+      opacity: 0.92;
+    }
+
+    .menu-card__preview-btn.is-transparent:hover {
+      background: transparent;
+      border-color: rgba(17, 17, 17, 0.24);
+      color: rgba(17, 17, 17, 0.72);
+      opacity: 1;
+    }
+
+    .price-pill {
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 2px 10px rgba(233, 118, 34, 0.45);
+    }
+
+    .special-block {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 18px;
+      margin-top: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+
+    .special-block h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: lowercase;
+    }
+
+    .special-block .flavors {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .flavor-tag {
+      background: rgba(128, 128, 128, 0.1);
+      color: #666;
+      border: 1px solid rgba(128, 128, 128, 0.2);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .price-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 20px;
+      margin-top: 8px;
+    }
+
+    .price-pair {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-row span:not(.pill-inline) {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .price-row .pill-inline {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+
+    .extra-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .special-block__extra {
+      margin-top: 14px;
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(17, 17, 17, 0.82);
+      z-index: 999;
+    }
+
+    .image-modal.is-open {
+      display: flex;
+    }
+
+    .image-modal__dialog {
+      position: relative;
+      width: min(92vw, 760px);
+      max-height: 90vh;
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .image-modal__close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.72);
+      color: var(--white);
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .image-modal__img {
+      display: block;
+      width: 100%;
+      max-height: 72vh;
+      object-fit: cover;
+      background: #f1f1f1;
+    }
+
+    .image-modal__caption {
+      padding: 16px 18px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .cart-float {
+      position: fixed;
+      right: 20px;
+      bottom: 30px;
+      z-index: 320;
+      width: 78px;
+      height: 78px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 0;
+      background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+      border: 3px solid rgba(255, 255, 255, 0.92);
+      border-radius: 50%;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .cart-float svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--white);
+      fill: none;
+    }
+
+    .cart-float.has-items {
+      background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+    }
+
+    .cart-float.is-bumping {
+      animation: cart-bump 0.45s ease;
+      transform-origin: center;
+    }
+
+    @keyframes cart-bump {
+      0% {
+        transform: scale(1);
+      }
+      35% {
+        transform: scale(1.18) rotate(-6deg);
+      }
+      70% {
+        transform: scale(0.96) rotate(4deg);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .cart-added-pop {
+      position: fixed;
+      right: 86px;
+      bottom: 46px;
+      z-index: 321;
+      display: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-dark);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(141, 63, 9, 0.28);
+      pointer-events: none;
+    }
+
+    .cart-added-pop.is-visible {
+      display: block;
+      animation: cart-pop 1.05s ease forwards;
+    }
+
+    @keyframes cart-pop {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.92);
+      }
+      22% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      78% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.96);
+      }
+    }
+
+    .cart-count {
+      background: transparent;
+      color: var(--white);
+      padding: 0;
+      border-radius: 0;
+      font-family: "Stack Sans Headline", "Poppins", sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      min-width: auto;
+      text-align: center;
+      display: block;
+      margin-top: 4px;
+    }
+
+    #view-confirmation main.page-shell {
+      padding: 28px 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 138px);
+    }
+
+    #view-confirmation .confirmation-message {
+      max-width: none;
+      width: auto;
+      text-align: center;
+      font-size: clamp(1.8rem, 3.4vw, 2.2rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.18;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .cart-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(17, 17, 17, 0.56);
+      z-index: 998;
+    }
+
+    .cart-modal.is-open {
+      display: flex;
+    }
+
+    .cart-panel {
+      width: min(520px, 100%);
+      max-height: min(86vh, 720px);
+      overflow: auto;
+      background: linear-gradient(180deg, #ffffff 0%, #fff8f1 52%, #f5fff9 100%);
+      border: 1px solid rgba(233, 118, 34, 0.18);
+      border-radius: 24px 24px 18px 18px;
+      padding: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .cart-panel__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .cart-panel__title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent-strong);
+    }
+
+    .cart-close {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.08);
+      color: #111111;
+      cursor: pointer;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .cart-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .cart-empty {
+      padding: 18px;
+      border-radius: 14px;
+      background: var(--fresh-soft);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid rgba(23, 138, 103, 0.16);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffffff 0%, #fff7ef 52%, var(--fresh-soft) 100%);
+    }
+
+    .cart-item__name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cart-item__meta {
+      margin-top: 4px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .cart-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #fff1e5, #fff8ef);
+      color: var(--accent-strong);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .cart-total span:last-child {
+      color: var(--accent-dark);
+      white-space: nowrap;
+    }
+
+    .cart-remove {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.08);
+      color: #111111;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .cart-form {
+      display: grid;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .cart-form label {
+      display: grid;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .delivery-type {
+      border: 1px solid rgba(233, 118, 34, 0.18);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: #fff7ef;
+      margin-top: 4px;
+      margin-bottom: 0;
+    }
+
+    .delivery-type legend {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #111111;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .delivery-type__options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .delivery-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(141, 63, 9, 0.16);
+      border-radius: 14px;
+      padding: 12px;
+      background: var(--white);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+    }
+
+    .delivery-option:hover,
+    .delivery-option:focus-within {
+      border-color: var(--accent);
+      background: #fff3e8;
+      box-shadow: 0 2px 10px rgba(233, 118, 34, 0.1);
+    }
+
+    .delivery-option input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .delivery-option span {
+      order: -1;
+      white-space: normal;
+      flex: none;
+      line-height: 1.2;
+      color: #111111;
+    }
+
+    .delivery-option input:checked + span {
+      color: var(--accent-dark);
+    }
+
+    .cart-form input {
+      width: 100%;
+      border: 1px solid rgba(141, 63, 9, 0.22);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font: inherit;
+      font-size: 0.9rem;
+      background: #fffdf9;
+      color: var(--text);
+    }
+
+    .cart-submit {
+      margin-top: 4px;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      background: linear-gradient(135deg, #f6862d, #42bd91);
+      color: var(--white);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(23, 138, 103, 0.22);
+    }
+
+    .cart-submit:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+      box-shadow: none;
+    }
+
+    .cart-status {
+      min-height: 20px;
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .item-config-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(17, 17, 17, 0.42);
+      z-index: 1000;
+    }
+
+    .item-config-modal.is-open {
+      display: flex;
+    }
+
+    .item-config-panel {
+      width: min(460px, 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #fff8f1 55%, #f6fff9 100%);
+      border: 1px solid rgba(23, 138, 103, 0.16);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+      max-height: min(86vh, 620px);
+      overflow: auto;
+    }
+
+    .item-config-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent-strong);
+      margin-bottom: 6px;
+    }
+
+    .item-config-subtitle {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .item-config-options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .item-config-choice,
+    .item-config-action {
+      width: 100%;
+      border: 1px solid rgba(233, 118, 34, 0.24);
+      border-radius: 14px;
+      padding: 11px 12px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    .item-config-choice:hover,
+    .item-config-action:hover {
+      border-color: var(--fresh);
+      background: var(--fresh-soft);
+    }
+
+    .item-config-choice span,
+    .item-config-action span {
+      color: var(--accent);
+      float: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .item-config-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .item-config-cancel {
+      margin-top: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 14px;
+      background: #fff3e8;
+      color: var(--accent-dark);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    @media (max-width: 520px) {
+      .cart-float {
+        right: 14px;
+        bottom: 24px;
+        width: 72px;
+        height: 72px;
+        padding: 8px 0;
+        gap: 4px;
+        font-size: 0.85rem;
+      }
+
+      .cart-float svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .cart-count {
+        padding: 0;
+        font-size: 1rem;
+        min-width: auto;
+      }
+
+      #view-confirmation main.page-shell {
+        min-height: calc(100vh - 120px);
+        padding: 20px 16px 30px;
+      }
+
+      #view-confirmation .confirmation-message {
+        font-size: 1.35rem;
+        line-height: 1.25;
+        max-width: 100%;
+        padding: 0 10px;
+        white-space: normal;
+      }
+
+      .cart-panel {
+        width: min(480px, 100%);
+        padding: 14px;
+        border-radius: 20px;
+      }
+
+      .cart-panel__title {
+        font-size: 1rem;
+      }
+
+      .cart-close {
+        width: 34px;
+        height: 34px;
+        font-size: 1.2rem;
+      }
+
+      .cart-item {
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .cart-item__name {
+        font-size: 0.85rem;
+      }
+
+      .cart-item__meta {
+        font-size: 0.74rem;
+      }
+
+      .cart-total {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+
+      .cart-remove {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+      }
+
+      .cart-added-pop {
+        right: 68px;
+        bottom: 38px;
+        font-size: 0.75rem;
+        padding: 7px 11px;
+      }
+
+      .cart-form {
+        gap: 8px;
+        padding-top: 12px;
+      }
+
+      .cart-form label {
+        font-size: 0.74rem;
+        gap: 5px;
+      }
+
+      .delivery-type {
+        padding: 12px 14px;
+        margin-top: 3px;
+        border-radius: 16px;
+      }
+
+      .delivery-type legend {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+      }
+
+      .delivery-type__options {
+        gap: 8px;
+      }
+
+      .delivery-option {
+        gap: 6px;
+        padding: 10px;
+        border-radius: 12px;
+        font-size: 0.88rem;
+      }
+
+      .delivery-option input {
+        width: 18px;
+        height: 18px;
+      }
+
+      .cart-form input {
+        padding: 9px 11px;
+        font-size: 0.85rem;
+        border-radius: 10px;
+      }
+
+      .cart-form input::placeholder {
+        font-size: 0.85rem;
+      }
+
+      .cart-submit {
+        padding: 11px 16px;
+        font-size: 0.95rem;
+        border-radius: 999px;
+        margin-top: 3px;
+      }
+
+      .cart-status {
+        font-size: 0.78rem;
+        min-height: 18px;
+      }
+
+      .item-config-panel {
+        width: min(440px, 100%);
+        padding: 14px;
+        border-radius: 20px;
+        max-height: min(80vh, 600px);
+      }
+
+      .item-config-title {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+      }
+
+      .item-config-subtitle {
+        font-size: 0.78rem;
+        margin-bottom: 12px;
+      }
+
+      .item-config-options {
+        gap: 7px;
+      }
+
+      .item-config-choice,
+      .item-config-action {
+        padding: 9px 11px;
+        font-size: 0.85rem;
+        border-radius: 12px;
+      }
+
+      .item-config-choice span,
+      .item-config-action span {
+        font-size: 0.82rem;
+      }
+
+      .item-config-actions {
+        gap: 7px;
+        margin-top: 10px;
+      }
+
+      .item-config-cancel {
+        padding: 9px 12px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+      }
+
+      .image-modal__dialog {
+        width: min(90vw, 700px);
+        border-radius: 20px;
+      }
+
+      .image-modal__close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+        top: 10px;
+        right: 10px;
+      }
+
+      .image-modal__img {
+        max-height: 65vh;
+      }
+
+      .image-modal__caption {
+        padding: 12px 14px 14px;
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .cart-panel {
+        width: min(100%, 400px);
+        padding: 12px;
+        border-radius: 18px;
+      }
+
+      .cart-panel__title {
+        font-size: 0.95rem;
+      }
+
+      .cart-close {
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+      }
+
+      .cart-item {
+        padding: 8px;
+        gap: 6px;
+      }
+
+      .cart-item__name {
+        font-size: 0.8rem;
+      }
+
+      .cart-item__meta {
+        font-size: 0.7rem;
+      }
+
+      .cart-total {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+      }
+
+      .cart-remove {
+        width: 26px;
+        height: 26px;
+        font-size: 0.95rem;
+      }
+
+      .cart-form {
+        gap: 7px;
+        padding-top: 10px;
+      }
+
+      .cart-form label {
+        font-size: 0.7rem;
+        gap: 4px;
+      }
+
+      .delivery-type {
+        padding: 10px 12px;
+        margin-top: 2px;
+        border-radius: 14px;
+      }
+
+      .delivery-type legend {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+      }
+
+      .delivery-type__options {
+        gap: 7px;
+      }
+
+      .delivery-option {
+        gap: 5px;
+        padding: 8px;
+        font-size: 0.82rem;
+        border-radius: 10px;
+      }
+
+      .delivery-option input {
+        width: 16px;
+        height: 16px;
+      }
+
+      .delivery-option span {
+        font-size: 0.8rem;
+      }
+
+      .cart-form input {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-radius: 9px;
+      }
+
+      .cart-form input::placeholder {
+        font-size: 0.8rem;
+      }
+
+      .cart-submit {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+        margin-top: 2px;
+        border-radius: 999px;
+      }
+
+      .cart-status {
+        font-size: 0.75rem;
+        min-height: 16px;
+      }
+
+      .item-config-panel {
+        width: min(100%, 380px);
+        padding: 12px;
+        border-radius: 18px;
+        max-height: min(78vh, 580px);
+      }
+
+      .item-config-title {
+        font-size: 0.9rem;
+      }
+
+      .item-config-subtitle {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+      }
+
+      .item-config-options {
+        gap: 6px;
+      }
+
+      .item-config-choice,
+      .item-config-action {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-radius: 10px;
+      }
+
+      .item-config-choice span,
+      .item-config-action span {
+        font-size: 0.78rem;
+      }
+
+      .item-config-actions {
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .item-config-cancel {
+        padding: 8px 11px;
+        font-size: 0.9rem;
+        margin-top: 6px;
+      }
+
+      .image-modal {
+        padding: 12px;
+      }
+
+      .image-modal__dialog {
+        width: min(100%, 85vw);
+        border-radius: 18px;
+      }
+
+      .image-modal__close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+        top: 8px;
+        right: 8px;
+      }
+
+      .image-modal__img {
+        max-height: 60vh;
+      }
+
+      .image-modal__caption {
+        padding: 10px 12px 12px;
+        font-size: 0.82rem;
+      }
+
+      .items-grid {
+        gap: 10px;
+      }
+
+      .menu-card {
+        padding: 10px 60px 10px 10px;
+        min-height: 54px;
+      }
+
+      .menu-card__name {
+        font-size: 0.78rem;
+      }
+
+      .menu-card__desc {
+        font-size: 0.62rem;
+        padding: 5px 7px;
+      }
+
+      .menu-card__option {
+        font-size: 0.6rem;
+        padding: 4px 7px;
+      }
+
+      .menu-card__preview-btn {
+        font-size: 0.65rem;
+        padding: 5px 9px;
+      }
+
+      .menu-card__preview-icon {
+        font-size: 0.85rem;
+      }
+
+      .price-pill {
+        font-size: 0.65rem;
+        padding: 5px 9px;
+      }
+
+      .special-block {
+        padding: 12px;
+      }
+
+      .special-block h4 {
+        font-size: 0.85rem;
+      }
+
+      .special-block .flavors {
+        font-size: 0.7rem;
+        gap: 5px;
+      }
+
+      .flavor-tag {
+        padding: 2px 8px;
+        font-size: 0.6rem;
+      }
+
+      .section-heading {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        gap: 5px;
+      }
+
+      .section-heading__emoji {
+        font-size: 1rem;
+      }
+
+      .section-heading__title {
+        font-size: 0.9rem;
+      }
+
+      .section-heading__sub {
+        font-size: 0.68rem;
+      }
+
+      .menu-inner {
+        padding: 12px 10px 18px;
+      }
+
+      #view-menu {
+        padding-bottom: 65px;
+      }
+
+      .hero {
+        padding: 16px 14px;
+        border-radius: 24px;
+        margin-bottom: 18px;
+      }
+
+      .hero__eyebrow {
+        font-size: 0.68rem;
+        padding: 4px 10px;
+      }
+
+      .hero__title {
+        font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+        margin-top: 12px;
+      }
+
+      .hero__lead {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-top: 9px;
+      }
+
+      .hero__stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .hero__stat {
+        padding: 10px 12px;
+        border-radius: 14px;
+      }
+
+      .hero__stat strong {
+        font-size: 0.9rem;
+      }
+
+      .hero__stat span {
+        font-size: 0.74rem;
+      }
+    }
+
+    [dir="rtl"] body,
+    body[dir="rtl"] {
+      font-family: "Tajawal", "Poppins", system-ui, -apple-system, sans-serif;
+    }
+
+    [dir="rtl"] .site-header,
+    body[dir="rtl"] .site-header {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .header-controls,
+    body[dir="rtl"] .header-controls {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .header-cta,
+    body[dir="rtl"] .header-cta {
+      text-align: right;
+    }
+
+    [dir="rtl"] .categories-title,
+    body[dir="rtl"] .categories-title {
+      text-align: right;
+    }
+
+    [dir="rtl"] .header-cta__row,
+    body[dir="rtl"] .header-cta__row {
+      justify-content: flex-start;
+    }
+
+    [dir="rtl"] .menu-card,
+    body[dir="rtl"] .menu-card {
+      padding: 18px 18px 18px 86px;
+    }
+
+    [dir="rtl"] .menu-card--family-box,
+    body[dir="rtl"] .menu-card--family-box {
+      padding: 18px 16px 18px 72px;
+    }
+
+    [dir="rtl"] .menu-card__desc,
+    body[dir="rtl"] .menu-card__desc {
+      border-left: none;
+      border-right: 4px solid rgba(233, 118, 34, 0.45);
+    }
+
+    [dir="rtl"] .menu-card__option,
+    body[dir="rtl"] .menu-card__option {
+      align-self: flex-end;
+    }
+
+    [dir="rtl"] .price-pill,
+    body[dir="rtl"] .price-pill {
+      right: auto;
+      left: -6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="view-categories">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand__mark"><img src="logo brimochicken.png" alt="BRIMO CHICKEN logo" /></div>
+        <div>
+          <span class="brand__name">BRIMO CHICKEN</span>
+          <span class="brand__tagline">Fast food</span>
+        </div>
+      </div>
+      <div class="header-cta">
+        <div class="header-cta__row">
+          <svg class="header-cta__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="8" y="12" width="32" height="26" rx="4" stroke="currentColor" stroke-width="2.5" />
+            <path d="M16 12V10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="20" cy="22" r="2" fill="currentColor" />
+            <circle cx="28" cy="22" r="2" fill="currentColor" />
+            <path d="M18 30c2 3 10 3 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <div>
+            <div class="header-cta__title" data-ui="orderNow">Commandez maintenant</div>
+            <div class="header-cta__phone"><a href="tel:+212680720477">+212 680 720 477</a></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="page-shell">
+      <h1 class="categories-title" data-ui="categoriesTitle">Catégories</h1>
+      <div class="cat-grid" id="cat-grid"></div>
+    </main>
+  </div>
+
+  <div id="view-menu">
+    <div class="menu-header-bar">
+      <header class="site-header">
+        <div class="header-with-back">
+          <button type="button" class="btn-back" id="btn-back" aria-label="Retour">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="brand">
+            <div class="brand__mark"><img src="logo brimochicken.png" alt="BRIMO CHICKEN logo" /></div>
+            <div>
+              <span class="brand__name">BRIMO CHICKEN</span>
+              <span class="brand__tagline">Fast food</span>
+            </div>
+          </div>
+        </div>
+        <div class="header-cta">
+          <div class="header-cta__row">
+            <svg class="header-cta__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <rect x="8" y="12" width="32" height="26" rx="4" stroke="currentColor" stroke-width="2.5" />
+              <path d="M16 12V10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+              <circle cx="20" cy="22" r="2" fill="currentColor" />
+              <circle cx="28" cy="22" r="2" fill="currentColor" />
+              <path d="M18 30c2 3 10 3 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <div>
+              <div class="header-cta__title" data-ui="orderNow">Commandez maintenant</div>
+              <div class="header-cta__phone"><a href="tel:+212680720477">+212 680 720 477</a></div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="page-shell">
+      <div class="menu-inner" id="menu-inner"></div>
+    </div>
+  </div>
+
+  <div id="view-confirmation" style="display: none;">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand__mark"><img src="logo brimochicken.png" alt="BRIMO CHICKEN logo" /></div>
+        <div>
+          <span class="brand__name">BRIMO CHICKEN</span>
+          <span class="brand__tagline">Fast food</span>
+        </div>
+      </div>
+      <div class="header-cta">
+        <div class="header-cta__row">
+          <svg class="header-cta__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="8" y="12" width="32" height="26" rx="4" stroke="currentColor" stroke-width="2.5" />
+            <path d="M16 12V10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="20" cy="22" r="2" fill="currentColor" />
+            <circle cx="28" cy="22" r="2" fill="currentColor" />
+            <path d="M18 30c2 3 10 3 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <div>
+            <div class="header-cta__title">Commandez maintenant</div>
+            <div class="header-cta__phone"><a href="tel:+212680720477">+212 680 720 477</a></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="page-shell">
+      <div class="confirmation-message">Veuillez diriger vers la caisse pour confirmer votre commande</div>
+    </main>
+  </div>
+
+  <div class="image-modal" id="image-modal" aria-hidden="true">
+    <div class="image-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="image-modal-caption">
+      <button type="button" class="image-modal__close" id="image-modal-close" aria-label="Fermer l'image">×</button>
+      <img class="image-modal__img" id="image-modal-img" alt="" />
+      <div class="image-modal__caption" id="image-modal-caption"></div>
+    </div>
+  </div>
+
+  <button type="button" class="cart-float" id="cart-open" aria-label="Ouvrir le panier">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" aria-hidden="true">
+      <circle cx="9" cy="20" r="1.7"></circle>
+      <circle cx="17" cy="20" r="1.7"></circle>
+      <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 8H6"></path>
+    </svg>
+    <span class="cart-count" id="cart-count">0</span>
+  </button>
+  <div class="cart-added-pop" id="cart-added-pop" aria-hidden="true">Ajouté</div>
+
+  <div class="cart-modal" id="cart-modal" aria-hidden="true">
+    <div class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-panel__header">
+        <div class="cart-panel__title" id="cart-title">Panier</div>
+        <button type="button" class="cart-close" id="cart-close" aria-label="Fermer le panier">×</button>
+      </div>
+      <div id="cart-view">
+        <div class="cart-list" id="cart-list"></div>
+        <div class="cart-total" id="cart-total">
+          <span>Total</span>
+          <span>0 DH</span>
+        </div>
+        <form class="cart-form" id="cart-form" novalidate>
+          <fieldset class="delivery-type" aria-labelledby="delivery-type-label">
+            <legend id="delivery-type-label">Type de commande</legend>
+            <div class="delivery-type__options">
+              <label class="delivery-option">
+                <input type="radio" name="delivery" value="table" checked required />
+                <span>À table</span>
+              </label>
+              <label class="delivery-option">
+                <input type="radio" name="delivery" value="takeaway" required />
+                <span>À emporter</span>
+              </label>
+            </div>
+          </fieldset>
+          <label>
+            Nom
+            <input type="text" name="nom" autocomplete="family-name" required />
+          </label>
+          <label>
+            Prénom
+            <input type="text" name="prenom" autocomplete="given-name" required />
+          </label>
+          <label id="delivery-field-label">
+            <span id="delivery-field-text">Numéro de table</span>
+            <input type="number" name="table_number" id="delivery-field-input" min="1" inputmode="numeric" required />
+          </label>
+          <button type="submit" class="cart-submit" id="cart-submit">Commander</button>
+          <div class="cart-status" id="cart-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-config-modal" id="item-config-modal" aria-hidden="true">
+    <div class="item-config-panel" role="dialog" aria-modal="true" aria-labelledby="item-config-title">
+      <div class="item-config-title" id="item-config-title">Choisir une option</div>
+      <div class="item-config-subtitle" id="item-config-subtitle"></div>
+      <div class="item-config-options" id="item-config-options"></div>
+      <div class="item-config-actions" id="item-config-actions"></div>
+      <button type="button" class="item-config-cancel" id="item-config-cancel">Annuler</button>
+    </div>
+  </div>
+
+  <script>
+    const uiText = {
+      orderNow: "Commandez maintenant",
+      categoriesTitle: "Catégories",
+      back: "Retour",
+      closeImage: "Fermer l'image",
+      previewFallback: "Voir l'image",
+    };
+
+    function t(key) {
+      return uiText[key] || key;
+    }
+
+    function localized(value) {
+      if (!value || typeof value !== "object" || Array.isArray(value)) return value;
+      return value.fr || "";
+    }
+
+    const categoryImages = {
+      burgers: "burgeres.jpg",   // burger/poulet
+      poulet: "ed83cb67-9870-4c5a-b438-736ded10cdc7.jpg",   // sandwichs poulet
+      familial: "istockphoto-177005490-612x612.jpg",      // menus familiaux
+      bowls: "bol et macaroni au fromage.jpg",                                  // bols + macaroni (meilleur disponible)
+      salades: "eiliv-aceron-mW0LIBBHNdE-unsplash.jpg",                                // salades
+      jus: "smoothies_sucre_gallerylarge.jpg",                                    // jus
+      poutines: "poutines.jpg",                               // poutines, même style fast-food
+      tacos: "tacos.jpg",                                  // tacos
+      wraps: "wraps.jpg",                                  // wraps
+      kfc: "poulet frit coreen .jpg",      // poulet frit coréen
+      kentucky: "053-Photo_535x.jpg",      // kentucky style
+      fingers: "bouchees a grignoter.jpg",        // bouchées à grignoter
+    };  
+    // Vérifie qu’aucune catégorie n’est sans image (fallback si besoin)
+    for (const cat of Object.keys(categoryImages)) {
+      if (!categoryImages[cat]) {
+        categoryImages[cat] = "assets/ed83cb67-9870-4c5a-b438-736ded10cdc7.png";
+      }
+    }
+
+    const menuData = {
+      burgers: {
+        emoji: "🍔",
+        title: { fr: "Burgers", ar: "برغر" },
+        subtitle: { fr: "Poulet frit & burger smash", ar: "دجاج مقلي وبرغر سماش" },
+        items: [
+          {
+            name: "Chicken Burger",
+            price: "45 DH",
+            desc: { fr: "Big Buns, Tenders, Fromage Cheddar, Laitue, Sauce Magic, Oignon", ar: "خبز كبير، تندرز، جبنة شيدر، خس، صوص ماجيك، بصل" },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            imagePreview: "Chicken Burger.jpg",
+            imageLabel: { fr: "Voir le burger", ar: "عرض البرغر" },
+          },
+          {
+            name: "Biggest",
+            price: "60 DH",
+            desc: { fr: "Big Buns, Double Tenders, Fromage Cheddar, Laitue, Sauce Oignon", ar: "خبز كبير، دبل تندرز، جبنة شيدر، خس، صوص البصل" },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            imagePreview: "Biggest.jpg",
+            imageLabel: { fr: "Voir le burger", ar: "عرض البرغر" },
+          },
+          {
+            name: "Rosti Chicken",
+            price: "50 DH",
+            desc: { fr: "Tenders, laitue, cheddar, galette rosti, sauce.", ar: "تندرز، خس، شيدر، غاليت روستي، صوص." },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            imagePreview: "Rosti Chicken.jpg",
+            imageLabel: { fr: "Voir le burger", ar: "عرض البرغر" },
+          },
+          {
+            name: "American Burger",
+            price: "50 DH",
+            desc: { fr: "Big buns, steak kefta 100 g, laitue, tomate, fromage cheddar, bacon, sauce Biggy.", ar: "خبز كبير، ستيك كفتة 100غ، خس، طماطم، جبنة شيدر، بايكون، صوص بيغي." },
+            imagePreview: "american burgers.jpg",
+            imageLabel: { fr: "Voir le burger", ar: "عرض البرغر"},
+          },
+          {
+            name: "Texas Burger",
+            price: "50 DH",
+            desc: { fr: "Big buns, steak kefta 100 g, laitue, tomate, fromage cheddar, sauce Biggy.", ar: "خبز كبير، ستيك كفتة 100غ، خس، طماطم، جبنة شيدر، صوص بيغي." },
+            imagePreview: "Texas.jpg",
+            imageLabel: { fr: "Voir le burger", ar: "عرض البرغر" },
+          },
+          {
+            name: "B-Cheese",
+            price: "45 DH",
+            desc: { fr: "Big buns, steak kefta 100 g, laitue, tomate, fromage cheddar, sauce Biggy.", ar: "خبز كبير، ستيك كفتة 100غ، خس، طماطم، جبنة شيدر، صوص بيغي." },
+            imagePreview: "B-Cheese.jpg",
+            imageLabel: { fr: "Voir le burger", ar: "عرض البرغر" },
+          },
+          {
+            name: "B-Tower",
+            price: "70 DH",
+            desc: { fr: "Double steak (200 g kefta), bacon, oignon caramélisé, champignon, cheddar, laitue, sauce.", ar: "ستيك مزدوج (200غ كفتة)، بايكون، بصل مكرمل، فطر، شيدر، خس، صوص." },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            transparentPreviewButton: true,
+          },
+          {
+            name: "Hat-trick",
+            price: "85 DH",
+            desc: { fr: "Triple steak (300 g kefta), bacon, oignon caramélisé, champignon, cheddar, laitue, sauce.", ar: "ستيك ثلاثي (300غ كفتة)، بايكون، بصل مكرمل، فطر، شيدر، خس، صوص." },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            transparentPreviewButton: true,
+          },
+          {
+            name: "B-One",
+            price: "55 DH",
+            desc: { fr: "Steak simple (100 g kefta), bacon, oignon caramélisé, champignon, cheddar, laitue, sauce.", ar: "ستيك عادي (100غ كفتة)، بايكون، بصل مكرمل، فطر، شيدر، خس، صوص." },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            transparentPreviewButton: true,
+          },
+        ],
+      },
+      bowls: {
+        emoji: "🥘",
+        title: { fr: "Bols & macaroni au fromage", ar: "أطباق وماكاروني بالجبن" },
+        items: [
+          {
+            name: "BFC Riz",
+            price: "50 DH",
+            desc: { fr: "Riz basmati, tenders, raisins secs, oignon caramélisé, sauce BBQ", ar: "أرز بسمتي، تندرز، زبيب، بصل مكرمل، صوص باربكيو" },
+            imagePreview: "BFC Riz.jpg",
+            imageLabel: { fr: "Voir le bol", ar: "عرض الطبق" },
+          },
+          {
+            name: "Crispy Strips",
+            price: "50 DH",
+            desc: { fr: "Riz basmati, tenders, raisins secs, sauce", ar: "أرز بسمتي، تندرز، زبيب، صوص" },
+            imagePreview: "CRISPY STRIPS.jpg",
+            imageLabel: { fr: "Voir le bol", ar: "عرض الطبق" },
+          },
+          {
+            name: "Mac' kefta",
+            price: "50 DH",
+            desc: { fr: "Macaroni, kefta, oignon caramélisé, sauce fromage", ar: "ماكاروني، كفتة، بصل مكرمل، صوص الجبن" },
+            imagePreview: "Mac kefta.jpg",
+            imageLabel: { fr: "Voir le bol", ar: "عرض الطبق" },
+          },
+          {
+            name: "Chicanos",
+            price: "50 DH",
+            desc: { fr: "Macaroni, jalapeños, tenders, sauce fromage", ar: "ماكاروني، هالبينو، تندرز، صوص الجبن" },
+            imagePreview: "Chicanos.jpg",
+            imageLabel: { fr: "Voir le bol", ar: "عرض الطبق" },
+          },
+        ],
+      },
+      salades: {
+        emoji: "🥗",
+        title: { fr: "Salades", ar: "سلطات" },
+        subtitle: { fr: "Fraiches et gourmandes", ar: "طازجة وشهية" },
+        items: [
+          {
+            name: { fr: "Salade Macaroni", ar: "سلطة الماكروني" },
+            price: "35 DH",
+            desc: { fr: "Macaroni - maïs - Carottes râpées chou - Dinde fumée - marinée vinaigrette", ar: "ماكاروني، ذرة، جزر مبشور، ملفوف، ديك رومي مدخن، تتبيلة فينيغريت" },
+            imagePreview: "Salade Macaroni.jpg",
+            imageLabel: { fr: "Voir la salade", ar: "عرض السلطة" },
+          },
+          {
+            name: { fr: "Salade Chicken", ar: "سلطة الدجاج" },
+            price: "45 DH",
+            desc: { fr: "Laitue - Tomate - Olive - Maïs Carottes râpées - Crispy chicken", ar: "خس، طماطم، زيتون، ذرة، جزر مبشور، دجاج كريسبي" },
+            imagePreview: "Salade Chicken.jpg",
+            imageLabel: { fr: "Voir la salade", ar: "عرض السلطة" },
+          },
+        ],
+      },
+      jus: {
+        emoji: "🧃",
+        title: { fr: "Jus", ar: "عصائر" },
+        subtitle: { fr: "Fraicheur maison", ar: "انتعاش محضر في البيت" },
+        items: [
+          {
+            name: "Vitaboom",
+            desc: { fr: "Jus orange, ananas, mangue, banane sirop mangue, ananas", ar: "عصير برتقال، أناناس، مانجو، موز، سيرو مانجو، أناناس" },
+            price: "30 DH",
+            imagePreview: "Vitaboom.jpg",
+            imageLabel: { fr: "Voir le jus", ar: "عرض العصير" },
+          },
+          {
+            name: { fr: "Jus D'orange", ar: "عصير البرتقال" },
+            desc: { fr: "Orange", ar: "برتقال" },
+            price: "25 DH",
+            imagePreview: "Jus Dorange.jpg",
+            imageLabel: { fr: "Voir le jus", ar: "عرض العصير" },
+
+          },
+          {
+            name: { fr: "Jus De Banane", ar: "عصير الموز" },
+            desc: { fr: "Lait, banane", ar: "حليب، موز" },
+            price: "20 DH",
+            imagePreview: "Jus De Banane.jpg",
+            imageLabel: { fr: "Voir le jus", ar: "عرض العصير" },
+          },
+          {
+            name: "Sultane",
+            desc: { fr: "Lait, banane, dattes-raisin sec, figues sèches", ar: "حليب، موز، تمر، زبيب، تين مجفف" },
+            price: "30 DH",
+            imagePreview: "Sultane.jpg",
+            imageLabel: { fr: "Voir le jus", ar: "عرض العصير" },
+          },
+        ],
+      },
+      poutines: {
+        emoji: "🍟",
+        title: { fr: "Poutines (B-POUTINE)", ar: "بوتين (B-POUTINE)" },
+        items: [
+          {
+            name: { fr: "Poutine mixte", ar: "بوتين مشكل" },
+            price: "50 DH",
+            desc: { fr: "Frites, tenders, dinde fumée, oignon croustillant, sauce.", ar: "بطاطس، تندرز، ديك رومي مدخن، بصل مقرمش، صوص." },
+            topping: { fr: "➕ Extra topping (+6 DH) : Doritos, Cheetos, Pringles.", ar: "➕ إضافة اختيارية (+6 دراهم): دوريتوس، شيتوس، برينغلز." },
+            imagePreview: "POUTINE-MIX.jpg",
+            imageLabel: { fr: "Voir la poutine", ar: "عرض البوتين" },
+          },
+          {
+            name: { fr: "Poutine croustillante", ar: "بوتين مقرمشة" },
+            price: "50 DH",
+            desc: { fr: "Frites, tenders, oignon croustillant, sauce.", ar: "بطاطس، تندرز، بصل مقرمش، صوص." },
+            topping: { fr: "➕ Extra topping (+6 DH) : Doritos, Cheetos, Pringles.", ar: "➕ إضافة اختيارية (+6 دراهم): دوريتوس، شيتوس، برينغلز." },
+            imagePreview: "POUTINE-CRISPY .jpg",
+            imageLabel: { fr: "Voir la poutine", ar: "عرض البوتين" },
+          },
+        ],
+      },
+      tacos: {
+        emoji: "🌮",
+        title: { fr: "Tacos", ar: "تاكوس" },
+        items: [
+          {
+            name: "4-Mix",
+            price: "70 DH",
+            desc: { fr: "35 cm, Dinde, kefta, tenders, dinde fumée, frites, sauce fromagère", ar: "35 سم، ديك رومي، كفتة، تندرز، ديك رومي مدخن، بطاطس، صوص الجبن" },
+            imagePreview: "4-Mix.jpg",
+            imageLabel: { fr: "Voir le tacos", ar: "عرض التاكوس" },
+          },
+          {
+            name: "Tacomix",
+            price: "50 DH",
+            desc: { fr: "Viande hachée, frites, sauce fromagère, tenders", ar: "لحم مفروم، بطاطس، صوص الجبن، تندرز" },
+            imagePreview: "Tacos nuggets.jpg",
+            imageLabel: { fr: "Voir le tacos", ar: "عرض التاكوس" },
+          },
+          {
+            name: "Kentacos",
+            price: "50 DH",
+            desc: { fr: "Frites, sauce fromagère, crispy tenders", ar: "بطاطس، صوص الجبن، كريسبي تندرز" },
+            imagePreview: "Tacos nuggets.jpg",
+            imageLabel: { fr: "Voir le tacos", ar: "عرض التاكوس" },
+          },
+          {
+            name: { fr: "Tacos nuggets", ar: "تاكوس ناغتس" },
+            price: "50 DH",
+            desc: { fr: "Frites, pieces de nuggets, sauce fromage", ar: "بطاطس، قطع ناغتس، صوص الجبن" },
+            imagePreview: "Tacos nuggets.jpg",
+            imageLabel: { fr: "Voir le tacos", ar: "عرض التاكوس" },
+          },
+        ],
+      },
+      wraps: {
+        emoji: "🌯",
+        title: { fr: "Wraps (B-WRAP)", ar: "رابس (B-WRAP)" },
+        items: [
+          {
+            name: { fr: "Wrap suisse", ar: "راب سويس" },
+            price: "50 DH",
+            desc: { fr: "Laitue, tomate, tenders, fromage, cheddar, galette rosti, sauce.", ar: "خس، طماطم، تندرز، جبن، شيدر، غاليت روستي، صوص." },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            imagePreview: "SWISS WRAP.jpg",
+            imageLabel: { fr: "Voir le wrap", ar: "عرض الراب" },
+          },
+          {
+            name: "Pockito",
+            price: "60 DH",
+            desc: { fr: "Laitue, tomate, tenders, kefta, Fromage cheddar, galette rosti, sauce.", ar: "خس، طماطم، تندرز، كفتة، جبنة شيدر، غاليت روستي، صوص." },
+            option: { fr: "➕ Formule menu + 20 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 20 درهم (بطاطس + بيبسي)." },
+            imagePreview: "Pockito.jpg",
+            imageLabel: { fr: "Voir le wrap", ar: "عرض الراب" },
+          },
+        ],
+      },
+      poulet: {
+        emoji: "🍗",
+        title: { fr: "Sandwichs Poulet", ar: "ساندويتشات الدجاج" },
+        subtitle: { fr: "Sandwichs au poulet tendre et savoureux", ar: "ساندويتشات دجاج طرية ولذيذة" },
+        items: [
+          {
+            name: "B-Chicken",
+            price: "45 DH",
+            desc: { fr: "Pain long, laitue, tenders, tomate, Fromage cheddar, sauce onion.", ar: "خبز طويل، خس، تندرز، طماطم، جبنة شيدر، صوص البصل." },
+            topping: { fr: "➕ Option MENU + 18 DH (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 18 درهم (بطاطس + بيبسي)." },
+            imagePreview: "B-Chicken.jpg",
+            imageLabel: { fr: "Voir le sandwich", ar: "عرض الساندويتش" },
+          },
+          {
+            name: "B-Smocky",
+            price: "45 DH",
+            desc: { fr: "Pain long, laitue, tenders, tomate, dinde fumée, sauce BBQ.", ar: "خبز طويل، خس، تندرز، طماطم، ديك رومي مدخن، صوص باربكيو." },
+            topping: { fr: "➕ Option MENU + 18 DH  (frites + Pepsi).", ar: "➕ بالإضافة إلى خيار إضافي 18 درهم (بطاطس + بيبسي)." },
+            imagePreview: "B-Smocky1.jpg",
+            imageLabel: { fr: "Voir le sandwich", ar: "عرض الساندويتش" },
+          },
+        ],
+      },
+      familial: {
+        emoji: "👨‍👩‍👧‍👦",
+        title: { fr: "Menus Familiaux", ar: "وجبات عائلية" },
+        subtitle: { fr: "Repas complets pour toute la famille", ar: "وجبات كاملة لكل العائلة" },
+        items: [
+          {
+            name: "Family Box",
+            price: "185 DH",
+            desc: { fr: "• 5 tenders croustillants<br>• 5 franksticks savoureux<br>• 5 ailes de poulet dorées<br>• 2 portions de frites dorées à souhait<br>• 1 boisson rafraîchissante d'un litre", ar: "• 5 قطع تندرز مقرمشة<br>• 5 قطع فرانكستيكس لذيذة<br>• 5 أجنحة دجاج ذهبية<br>• حصتان من البطاطس المقلية<br>• مشروب منعش واحد لتر" },
+            imagePreview: "Menu familial.jpg",
+            imageLabel: { fr: "Voir le menu familial", ar: "عرض الوجبة العائلية" },
+          },
+          {
+            name: "Family Box",
+            price: "245 DH",
+            desc: { fr: "• 7 tenders croustillants<br>• 7 franksticks savoureux<br>• 7 ailes de poulet dorées<br>• 3 portions de frites dorées à souhait<br>• 2 boisson rafraîchissante d'un litre", ar: "• 7 قطع تندرز مقرمشة<br>• 7 قطع فرانكستيكس لذيذة<br>• 7 أجنحة دجاج ذهبية<br>• 3 حصص من البطاطس المقلية<br>• 2 مشروب منعش بسعة لتر" },
+            imagePreview: "Menu familial.jpg",
+            imageLabel: { fr: "Voir le menu familial", ar: "عرض الوجبة العائلية" },
+          }
+        ],
+      },
+      kfc: {
+        emoji: "🍗",
+        title: { fr: "Poulet frit coréen", ar: "دجاج مقلي كوري" },
+        special: [
+          {
+            name: { fr: "Lanières sticky", ar: "ستريپس ستيكي" },
+            flavors: { fr: "SMOCKY BBQ / CHILLI LEMON / CURRY", ar: "باربكيو مدخن / ليمون وفلفل / كاري" },
+            prices: [
+              { label: { fr: "4 pièces", ar: "4 قطع" }, value: "40 DH" },
+              { label: { fr: "8 pièces", ar: "8 قطع" }, value: "70 DH" },
+            ],
+            extra: { fr: "➕ Extra topping (+6 DH) : Doritos, Cheetos, Pringles.", ar: "➕ إضافة اختيارية (+6 دراهم): دوريتوس، شيتوس، برينغلز." },
+            imagePreview: "c2d7d8d7-08b1-4fec-848f-3d17b2da12f5.jpeg",
+            imageLabel: { fr: "Voir le poulet frit coréen", ar: "عرض الدجاج الكوري" },
+          },
+          {
+            name: { fr: "Ailes sticky", ar: "أجنحة ستيكي" },
+            flavors: { fr: "ASIA / VOLCANO / SWEETY BBQ", ar: "آسيوي / فولكان / باربكيو حلو" },
+            prices: [
+              { label: { fr: "6 pièces", ar: "6 قطع" }, value: "40 DH" },
+              { label: { fr: "12 pièces", ar: "12 قطعة" }, value: "70 DH" },
+            ],
+            extra: { fr: "➕ Extra topping (+6 DH) : Doritos, Cheetos, Pringles.", ar: "➕ إضافة اختيارية (+6 دراهم): دوريتوس، شيتوس، برينغلز." },
+            imagePreview: "8a276225-ecbf-42db-8e24-b3ead5291e14.jpeg",
+            imageLabel: { fr: "Voir le poulet frit coréen", ar: "عرض الدجاج الكوري" },
+          },
+        ],
+      },
+      kentucky: {
+        emoji: "🍗",
+        title: { fr: "Kentucky Style", ar: "ستايل كنتاكي" },
+        subtitle: { fr: "Drumsticks, tenders et hot wings", ar: "درامستيكس، تندرز وهوت وينغز" },
+        streetRows: [
+          {
+            name: "Drumsticks",
+            prices: [
+              { label: { fr: "2 pièces", ar: "2 قطع" }, value: "35 DH" },
+              { label: { fr: "4 pièces", ar: "4 قطع" }, value: "65 DH" },
+            ],
+            imagePreview: "drumsticks.jpg",
+            imageLabel: { fr: "Voir les drumsticks", ar: "عرض الدرومستيكس" },
+          },
+          {
+            name: "Tender",
+            prices: [
+              { label: { fr: "4 pièces", ar: "4 قطع" }, value: "40 DH" },
+              { label: { fr: "8 pièces", ar: "8 قطع" }, value: "70 DH" },
+            ],
+              imagePreview: "TENDER.jpg",
+              imageLabel: { fr: "Voir les tenders", ar: "عرض التندرز" },
+          },
+          {
+            name: "Hot Wings",
+            prices: [
+              { label: { fr: "6 pièces", ar: "6 قطع" }, value: "40 DH" },
+              { label: { fr: "12 pièces", ar: "12 قطعة" }, value: "70 DH" },
+            ],
+              imagePreview: "HOT-WINGS.jpg",
+              imageLabel: { fr: "Voir les hot wings", ar: "عرض الهوت وينغز" },
+          },
+        ],
+      },
+      fingers: {
+        emoji: "🧀",
+        title: { fr: "Bouchées à grignoter", ar: "لقيمات للمشاركة" },
+        streetRows: [
+          {
+            name: { fr: "nuggets.jpg", ar: "ناغتس" },
+            prices: [
+              { label: { fr: "5 pièces", ar: "5 قطع" }, value: "30 DH" },
+              { label: { fr: "10 pièces", ar: "10 قطع" }, value: "50 DH" },
+            ],
+            imageLabel: { fr: "Voir les Nuggets", ar: "عرض الناغتس" },
+          },
+          {
+            name: { fr: "", ar: "أصابع الموزاريلا" },
+            prices: [
+              { label: { fr: "4 pièces", ar: "4 قطع" }, value: "30 DH" },
+              { label: { fr: "8 pièces", ar: "8 قطع" }, value: "50 DH" },
+            ],
+              imagePreview: "MOZARELLA STICKS.jpg",
+              imageLabel: { fr: "Voir les Mozarella sticks", ar: "عرض أصابع الموزاريلا" },
+          },
+          {
+            name: { fr: "jalapeños cheddar.jpg", ar: "هالبينو شيدر" },
+            prices: [
+              { label: { fr: "3 pièces", ar: "3 قطع" }, value: "30 DH" },
+              { label: { fr: "6 pièces", ar: "6 قطع" }, value: "50 DH" },
+            ],
+            imagePreview: "jalapeños cheddar.jpg",
+            imageLabel: { fr: "Voir les jalapeños cheddar", ar: "عرض هالبينو شيدر" },
+          },
+        ],
+      },
+    };
+
+    const categoryList = [
+      { id: "burgers", label: { fr: "Burgers", ar: "برغر" } },
+      { id: "poulet", label: { fr: "Sandwichs Poulet", ar: "ساندويتشات الدجاج" } },
+      { id: "familial", label: { fr: "menus familiaux", ar: "وجبات عائلية" } },
+      { id: "bowls", label: { fr: "Bols & Macaroni au fromage", ar: "أطباق وماكاروني بالجبن" } },
+      { id: "salades", label: { fr: "Salades", ar: "سلطات" } },
+      { id: "jus", label: { fr: "Jus", ar: "عصائر" } },
+      { id: "poutines", label: { fr: "Poutines", ar: "بوتين" } },
+      { id: "tacos", label: { fr: "Tacos", ar: "تاكوس" } },
+      { id: "wraps", label: { fr: "Wraps", ar: "رابس" } },
+      { id: "kfc", label: { fr: "Poulet frit coréen", ar: "دجاج مقلي كوري" } },
+      { id: "kentucky", label: { fr: "Kentucky Style", ar: "ستايل كنتاكي" } },
+      { id: "fingers", label: { fr: "Bouchées à grignoter", ar: "لقيمات للمشاركة" } },
+    ];
+
+    function renderCategoryGrid() {
+      const grid = document.getElementById("cat-grid");
+      grid.innerHTML = categoryList
+        .map(
+          (c) => {
+            const label = localized(c.label);
+            return `
+        <button type="button" class="cat-card" data-id="${c.id}" aria-label="${label}">
+          <img class="cat-card__img" src="${categoryImages[c.id]}" alt="${label}" loading="lazy" decoding="async" />
+          <div class="cat-card__overlay"></div>
+          <span class="cat-card__label">${label}</span>
+        </button>
+      `;
+          }
+        )
+        .join("");
+      grid.querySelectorAll(".cat-card").forEach((btn) => {
+        btn.addEventListener("click", () => openMenu(btn.dataset.id));
+      });
+    }
+
+    function esc(s) {
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    const cartIconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" aria-hidden="true">
+      <circle cx="9" cy="20" r="1.7"></circle>
+      <circle cx="17" cy="20" r="1.7"></circle>
+      <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20 8H6"></path>
+    </svg>`;
+    const cartChoiceSets = new Map();
+    let cartChoiceSetId = 0;
+
+    function renderPreviewButton(src, title, label = t("previewFallback")) {
+      return `<button type="button" class="menu-card__preview-btn${
+        arguments[3] ? " is-transparent" : ""
+      }" data-preview-src="${esc(
+        src
+      )}" data-preview-title="${esc(title)}"><span class="menu-card__preview-icon" aria-hidden="true">📷</span><span>${esc(label)}</span></button>`;
+    }
+
+    function registerCartChoices(choices) {
+      if (!choices || !choices.length) return "";
+      cartChoiceSetId += 1;
+      const id = `choices-${cartChoiceSetId}`;
+      cartChoiceSets.set(id, choices);
+      return id;
+    }
+
+    function renderCartButton(name, price, optionText = "", choices = [], flavors = []) {
+      const choicesId = registerCartChoices(choices);
+      const flavorsId = registerCartChoices(flavors);
+      return `<button type="button" class="cart-icon-btn" aria-label="Ajouter ${esc(
+        name
+      )} au panier" data-cart-name="${esc(name)}" data-cart-price="${esc(
+        price
+      )}" data-cart-option="${esc(optionText)}" data-cart-choices-id="${esc(
+        choicesId
+      )}" data-cart-flavors-id="${esc(
+        flavorsId
+      )}">${cartIconSvg}</button>`;
+    }
+
+    function renderMenuActions(previewBtn, name, price, optionText = "", choices = [], flavors = []) {
+      return `<div class="menu-card__actions">${previewBtn}${renderCartButton(
+        name,
+        price,
+        optionText,
+        choices,
+        flavors
+      )}</div>`;
+    }
+
+    function renderMenuCard(item) {
+      const itemName = localized(item.name);
+      const itemDesc = localized(item.desc);
+      const itemOption = localized(item.option);
+      const itemTopping = localized(item.topping);
+      const itemImageLabel = localized(item.imageLabel);
+      const opt = itemOption
+        ? `<div class="menu-card__option">${esc(itemOption)}</div>`
+        : "";
+      const topping = itemTopping
+        ? `<div class="menu-card__option">${esc(itemTopping)}</div>`
+        : "";
+      const previewBtn = item.previewSrc
+        ? renderPreviewButton(
+            item.previewSrc,
+            item.previewTitle || itemName,
+            itemImageLabel || t("previewFallback"),
+            item.transparentPreviewButton
+          )
+        : "";
+      const actions = renderMenuActions(previewBtn, itemName, item.price, itemOption || itemTopping || "");
+      // Allow HTML in description for special items like Family Box
+      const descHtml = itemName.includes("Family Box") || itemName.includes("بوكس")
+        ? itemDesc
+        : esc(itemDesc);
+      
+      // Special layout for Family Box (no centering, more compact)
+      const cardClass = itemName.includes("Family Box") || itemName.includes("بوكس")
+        ? "menu-card menu-card--family-box" 
+        : "menu-card";
+      
+      return `
+        <article class="${cardClass}">
+          <div class="menu-card__name">${esc(itemName)}</div>
+          ${
+            itemDesc
+              ? `<div class="menu-card__desc">${descHtml}</div>`
+              : ""
+          }
+          ${opt}
+          ${topping}
+          ${actions}
+          <div class="price-pill">${esc(item.price)}</div>
+        </article>
+      `;
+    }
+
+    const imageModal = document.getElementById("image-modal");
+    const imageModalImg = document.getElementById("image-modal-img");
+    const imageModalCaption = document.getElementById("image-modal-caption");
+    const imageModalClose = document.getElementById("image-modal-close");
+    const cartModal = document.getElementById("cart-modal");
+    const cartOpen = document.getElementById("cart-open");
+    const cartClose = document.getElementById("cart-close");
+    const cartList = document.getElementById("cart-list");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+    const cartAddedPop = document.getElementById("cart-added-pop");
+    const cartForm = document.getElementById("cart-form");
+    const cartSubmit = document.getElementById("cart-submit");
+    const cartStatus = document.getElementById("cart-status");
+    const itemConfigModal = document.getElementById("item-config-modal");
+    const itemConfigTitle = document.getElementById("item-config-title");
+    const itemConfigSubtitle = document.getElementById("item-config-subtitle");
+    const itemConfigOptions = document.getElementById("item-config-options");
+    const itemConfigActions = document.getElementById("item-config-actions");
+    const itemConfigCancel = document.getElementById("item-config-cancel");
+    const viewConfirmation = document.getElementById("view-confirmation");
+    const cartItems = [];
+    let pendingCartItem = null;
+    let cartAnimationTimer = null;
+    let pendingOrder = null;
+
+    // Gestion des options de livraison
+    const deliveryRadios = cartForm.querySelectorAll('input[name="delivery"]');
+    const deliveryFieldText = document.getElementById("delivery-field-text");
+    const deliveryFieldInput = document.getElementById("delivery-field-input");
+
+    function updateDeliveryField() {
+      const selectedDelivery = cartForm.querySelector('input[name="delivery"]:checked').value;
+      if (selectedDelivery === "takeaway") {
+        deliveryFieldText.textContent = "Numéro";
+        deliveryFieldInput.placeholder = "Sélectionne n'importe numéro de 1 à 99";
+        deliveryFieldInput.type = "number";
+        deliveryFieldInput.setAttribute("min", "1");
+        deliveryFieldInput.setAttribute("max", "99");
+        deliveryFieldInput.name = "number";
+      } else {
+        deliveryFieldText.textContent = "Numéro de table";
+        deliveryFieldInput.placeholder = "";
+        deliveryFieldInput.type = "number";
+        deliveryFieldInput.setAttribute("min", "1");
+        deliveryFieldInput.removeAttribute("max");
+        deliveryFieldInput.name = "table_number";
+      }
+    }
+
+    deliveryRadios.forEach((radio) => {
+      radio.addEventListener("change", updateDeliveryField);
+    });
+
+    function updateBodyLock() {
+      const modalIsOpen =
+        imageModal.classList.contains("is-open") ||
+        cartModal.classList.contains("is-open") ||
+        itemConfigModal.classList.contains("is-open");
+      document.body.style.overflow = modalIsOpen ? "hidden" : "";
+    }
+
+    function priceToNumber(price) {
+      const match = String(price).match(/(\d+(?:[.,]\d+)?)\s*DH/i);
+      return match ? Number(match[1].replace(",", ".")) : 0;
+    }
+
+    function formatPrice(value) {
+      return `${Number.isInteger(value) ? value : value.toFixed(2)} DH`;
+    }
+
+    function renderCart() {
+      const total = cartItems.reduce((sum, item) => sum + item.priceValue, 0);
+      cartCount.textContent = cartItems.length;
+      cartOpen.classList.toggle("has-items", cartItems.length > 0);
+      cartOpen.setAttribute("aria-label", `Ouvrir le panier, ${cartItems.length} produit sélectionné`);
+      cartTotal.querySelector("span:last-child").textContent = formatPrice(total);
+      cartSubmit.disabled = cartItems.length === 0;
+      cartStatus.textContent = "";
+
+      if (!cartItems.length) {
+        cartList.innerHTML = `<div class="cart-empty">Votre panier est vide.</div>`;
+        return;
+      }
+
+      cartList.innerHTML = cartItems
+        .map(
+          (item) => `
+            <div class="cart-item">
+              <div>
+                <div class="cart-item__name">${esc(item.name)}</div>
+                <div class="cart-item__meta">${esc(item.price)}</div>
+              </div>
+              <button type="button" class="cart-remove" aria-label="Retirer ${esc(
+                item.name
+              )}" data-cart-id="${item.id}">×</button>
+            </div>
+          `
+        )
+        .join("");
+
+      cartList.querySelectorAll(".cart-remove").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const index = cartItems.findIndex((item) => item.id === btn.dataset.cartId);
+          if (index >= 0) {
+            cartItems.splice(index, 1);
+            renderCart();
+          }
+        });
+      });
+    }
+
+    function playCartAnimation() {
+      window.clearTimeout(cartAnimationTimer);
+      cartOpen.classList.remove("is-bumping");
+      cartAddedPop.classList.remove("is-visible");
+      void cartOpen.offsetWidth;
+      void cartAddedPop.offsetWidth;
+      cartOpen.classList.add("is-bumping");
+      cartAddedPop.classList.add("is-visible");
+      cartAnimationTimer = window.setTimeout(() => {
+        cartOpen.classList.remove("is-bumping");
+        cartAddedPop.classList.remove("is-visible");
+      }, 1100);
+    }
+
+    function addToCart(name, price, priceValue = priceToNumber(price)) {
+      cartItems.push({
+        id: `${Date.now()}-${Math.random()}`,
+        name,
+        price,
+        priceValue,
+      });
+      renderCart();
+      playCartAnimation();
+    }
+
+    function closeItemConfig() {
+      pendingCartItem = null;
+      itemConfigModal.classList.remove("is-open");
+      itemConfigModal.setAttribute("aria-hidden", "true");
+      itemConfigOptions.innerHTML = "";
+      itemConfigActions.innerHTML = "";
+      updateBodyLock();
+    }
+
+    function finishConfiguredItem(choice = null, wantsOption = false, flavor = null, topping = null) {
+      if (!pendingCartItem) return;
+
+      let name = pendingCartItem.name;
+      let price = pendingCartItem.price;
+      let priceValue = priceToNumber(price);
+
+      if (choice) {
+        name = `${name} (${choice.label})`;
+        price = choice.price;
+        priceValue = priceToNumber(choice.price);
+      }
+
+      if (flavor) {
+        name = `${name} - ${flavor.label}`;
+      }
+
+      if (wantsOption || topping) {
+        const optionPrice = priceToNumber(pendingCartItem.optionText);
+        name = topping ? `${name} + ${topping.label}` : `${name} + option`;
+        price = topping ? `${price} + ${topping.label} ${formatPrice(optionPrice)}` : `${price} + ${pendingCartItem.optionText}`;
+        priceValue += optionPrice;
+      }
+
+      addToCart(name, price, priceValue);
+      closeItemConfig();
+    }
+
+    function renderItemConfig() {
+      const item = pendingCartItem;
+      const hasChoices = item.choices.length > 0;
+      const hasOption = Boolean(item.optionText);
+      const hasFlavors = item.flavors.length > 0;
+
+      itemConfigTitle.textContent = item.name;
+      itemConfigSubtitle.textContent = hasChoices
+        ? "Choisissez le format avant d'ajouter au panier."
+        : hasFlavors
+          ? "Choisissez une sauce."
+          : "Voulez-vous ajouter l'option menu ?";
+
+      itemConfigOptions.innerHTML = hasChoices
+        ? item.choices
+            .map(
+              (choice, index) =>
+                `<button type="button" class="item-config-choice" data-choice-index="${index}">${esc(
+                  choice.label
+                )}<span>${esc(choice.price)}</span></button>`
+            )
+            .join("")
+        : "";
+
+      itemConfigActions.innerHTML = hasOption && !hasChoices && !hasFlavors
+        ? `<button type="button" class="item-config-action" data-option-choice="no">Sans option</button>
+           <button type="button" class="item-config-action" data-option-choice="yes">Avec option <span>+${esc(
+             String(priceToNumber(item.optionText))
+           )} DH</span></button>`
+        : "";
+
+      itemConfigModal.classList.add("is-open");
+      itemConfigModal.setAttribute("aria-hidden", "false");
+      updateBodyLock();
+    }
+
+    function renderOptionStep(choice) {
+      pendingCartItem.selectedChoice = choice;
+      if (pendingCartItem.flavors.length) {
+        renderFlavorStep();
+        return;
+      }
+
+      itemConfigSubtitle.textContent = "Voulez-vous ajouter cette option ?";
+      itemConfigOptions.innerHTML = `<div class="cart-item">
+        <div>
+          <div class="cart-item__name">${esc(choice.label)}</div>
+          <div class="cart-item__meta">${esc(choice.price)}</div>
+        </div>
+      </div>`;
+      itemConfigActions.innerHTML = `<button type="button" class="item-config-action" data-option-choice="no">Sans option</button>
+        <button type="button" class="item-config-action" data-option-choice="yes">Avec option <span>+${esc(
+          String(priceToNumber(pendingCartItem.optionText))
+        )} DH</span></button>`;
+    }
+
+    function renderFlavorStep() {
+      itemConfigSubtitle.textContent = "Choisissez la sauce.";
+      itemConfigOptions.innerHTML = pendingCartItem.flavors
+        .map(
+          (flavor, index) =>
+            `<button type="button" class="item-config-choice" data-flavor-index="${index}">${esc(
+              flavor.label
+            )}</button>`
+        )
+        .join("");
+      itemConfigActions.innerHTML = "";
+    }
+
+    function renderToppingStep(flavor) {
+      pendingCartItem.selectedFlavor = flavor;
+      itemConfigSubtitle.textContent = "Voulez-vous ajouter un extra topping ?";
+      itemConfigOptions.innerHTML = `<div class="cart-item">
+        <div>
+          <div class="cart-item__name">${esc(flavor.label)}</div>
+          <div class="cart-item__meta">Sauce sélectionnée</div>
+        </div>
+      </div>`;
+      const toppingPrice = priceToNumber(pendingCartItem.optionText);
+      itemConfigActions.innerHTML = `<button type="button" class="item-config-action" data-topping-choice="no">Sans topping</button>
+        <button type="button" class="item-config-action" data-topping-choice="Doritos">Doritos <span>+${formatPrice(toppingPrice)}</span></button>
+        <button type="button" class="item-config-action" data-topping-choice="Cheetos">Cheetos <span>+${formatPrice(toppingPrice)}</span></button>
+        <button type="button" class="item-config-action" data-topping-choice="Pringles">Pringles <span>+${formatPrice(toppingPrice)}</span></button>`;
+    }
+
+    function addConfiguredItemToCart(btn) {
+      const optionText = btn.dataset.cartOption || "";
+      const choices = cartChoiceSets.get(btn.dataset.cartChoicesId || "") || [];
+      const flavors = cartChoiceSets.get(btn.dataset.cartFlavorsId || "") || [];
+
+      pendingCartItem = {
+        name: btn.dataset.cartName,
+        price: btn.dataset.cartPrice,
+        optionText,
+        choices,
+        flavors,
+        selectedChoice: null,
+        selectedFlavor: null,
+      };
+
+      if (!choices.length && !optionText) {
+        finishConfiguredItem();
+        return;
+      }
+
+      renderItemConfig();
+    }
+
+    function openCart() {
+      cartModal.classList.add("is-open");
+      cartModal.setAttribute("aria-hidden", "false");
+      renderCart();
+      updateBodyLock();
+    }
+
+    function closeCart() {
+      cartModal.classList.remove("is-open");
+      cartModal.setAttribute("aria-hidden", "true");
+      updateBodyLock();
+    }
+
+    function openImageModal(src, title) {
+      imageModalImg.src = src;
+      imageModalImg.alt = title;
+      imageModalCaption.textContent = title;
+      imageModal.classList.add("is-open");
+      imageModal.setAttribute("aria-hidden", "false");
+      updateBodyLock();
+    }
+
+    function closeImageModal() {
+      imageModal.classList.remove("is-open");
+      imageModal.setAttribute("aria-hidden", "true");
+      imageModalImg.src = "";
+      imageModalImg.alt = "";
+      imageModalCaption.textContent = "";
+      updateBodyLock();
+    }
+
+    function renderMenu(id) {
+      const data = menuData[id];
+      const inner = document.getElementById("menu-inner");
+      const categoryPreview = categoryImages[id];
+      let html = "";
+
+      const dataTitle = localized(data.title);
+      const dataSubtitle = localized(data.subtitle);
+      const sub = dataSubtitle
+        ? `<span class="section-heading__sub">${esc(dataSubtitle)}</span>`
+        : "";
+
+      html += `<div class="section-heading">
+        <span class="section-heading__emoji">${data.emoji}</span>
+        <span class="section-heading__title">${esc(dataTitle)}</span>
+        ${sub}
+      </div>`;
+
+      if (data.items && data.items.length) {
+        const itemsWithPreview = data.items.map((item) => ({
+          ...item,
+          previewSrc: item.imagePreview || categoryPreview,
+          previewTitle: localized(item.name),
+        }));
+        html += `<div class="items-grid">${itemsWithPreview.map(renderMenuCard).join("")}</div>`;
+      }
+
+      if (data.footer) {
+        html += `<p class="extra-note" style="margin-top:14px">${esc(
+          localized(data.footer)
+        )}</p>`;
+      }
+
+      if (data.special) {
+        data.special.forEach((block) => {
+          const blockName = localized(block.name);
+          const blockFlavorsText = localized(block.flavors);
+          const blockExtra = localized(block.extra);
+          const blockImageLabel = localized(block.imageLabel);
+          const flavorsArray = blockFlavorsText.split(' / ');
+          const flavorsHtml = flavorsArray.map(flavor => 
+            `<span class="flavor-tag">${esc(flavor.trim())}</span>`
+          ).join('');
+          const blockPrice = block.prices
+            .map((p) => `${localized(p.label)} ${p.value}`)
+            .join(" / ");
+          const blockChoices = block.prices.map((p) => ({
+            label: localized(p.label),
+            price: p.value,
+          }));
+          const blockFlavorChoices = flavorsArray.map((flavor) => ({
+            label: flavor.trim(),
+          }));
+          
+          html += `<div class="special-block">
+            <h4>${esc(blockName)}</h4>
+            <div class="flavors">${flavorsHtml}</div>
+            <div class="price-row">
+              ${block.prices
+                .map(
+                  (p) =>
+                    `<span class="price-pair"><span>${esc(
+                      localized(p.label)
+                    )}</span><span class="pill-inline">${esc(
+                      p.value
+                    )}</span></span>`
+                )
+                .join("")}
+            </div>
+            ${
+              blockExtra
+                ? `<div class="menu-card__option special-block__extra">${esc(
+                    blockExtra
+                  )}</div>`
+                : ""
+            }
+            ${renderMenuActions(
+              renderPreviewButton(
+                block.imagePreview || categoryPreview,
+                blockName,
+                blockImageLabel || t("previewFallback")
+              ),
+              blockName,
+              blockPrice,
+              blockExtra || "",
+              blockChoices,
+              blockFlavorChoices
+            )}
+          </div>`;
+        });
+      }
+
+      if (data.streetRows) {
+        html += `<div class="items-grid">`;
+        data.streetRows.forEach((row) => {
+          const pricesHtml = row.prices
+            .map(
+              (p) =>
+                `<span style="display:inline-flex;align-items:center;gap:8px;margin-right:12px;margin-top:6px"><span style="font-size:0.85rem">${esc(
+                  localized(p.label)
+                )}</span><span class="pill-inline" style="position:relative;right:auto;top:auto;transform:none">${esc(
+                  p.value
+                )}</span></span>`
+            )
+            .join("");
+          const rowName = localized(row.name);
+          const rowPrice = row.prices
+            .map((p) => `${localized(p.label)} ${p.value}`)
+            .join(" / ");
+          const rowChoices = row.prices.map((p) => ({
+            label: localized(p.label),
+            price: p.value,
+          }));
+          html += `<article class="menu-card" style="padding:16px;grid-column:1/-1;max-width:100%">
+            <div class="menu-card__name" style="margin-bottom:10px">${esc(
+              rowName
+            )}</div>
+            <div class="price-row" style="margin-top:0">${pricesHtml}</div>
+            ${renderMenuActions(
+              renderPreviewButton(
+                row.imagePreview || categoryPreview,
+                rowName,
+                localized(row.imageLabel) || t("previewFallback")
+              ),
+              rowName,
+              rowPrice,
+              "",
+              rowChoices
+            )}
+          </article>`;
+        });
+        html += `</div>`;
+      }
+
+      inner.innerHTML = html;
+      inner.querySelectorAll(".menu-card__preview-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          openImageModal(btn.dataset.previewSrc, btn.dataset.previewTitle);
+        });
+      });
+      inner.querySelectorAll(".cart-icon-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          addConfiguredItemToCart(btn);
+        });
+      });
+    }
+
+    function openMenu(id) {
+      document.getElementById("view-categories").classList.add("hidden");
+      document.getElementById("view-menu").classList.add("is-visible");
+      renderMenu(id);
+      window.location.hash = id;
+    }
+
+    function showConfirmationPage() {
+      document.getElementById("view-categories").style.display = "none";
+      document.getElementById("view-menu").style.display = "none";
+      viewConfirmation.style.display = "block";
+      cartOpen.style.display = "none";
+      document.body.style.overflow = "hidden";
+    }
+
+    function hideConfirmationPage() {
+      viewConfirmation.style.display = "none";
+      document.getElementById("view-categories").style.display = "block";
+      cartOpen.style.display = "inline-flex";
+      document.body.style.overflow = "";
+    }
+
+    function closeMenu() {
+      document.getElementById("view-categories").classList.remove("hidden");
+      document.getElementById("view-menu").classList.remove("is-visible");
+      if (window.location.hash) {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
+    }
+
+    function applyLanguage() {
+      document.documentElement.lang = "fr";
+      document.documentElement.dir = "ltr";
+      document.body.dir = "ltr";
+      document.querySelectorAll("[data-ui]").forEach((el) => {
+        el.textContent = t(el.dataset.ui);
+      });
+      document.getElementById("btn-back").setAttribute("aria-label", t("back"));
+      document.getElementById("image-modal-close").setAttribute("aria-label", t("closeImage"));
+      renderCategoryGrid();
+      const currentMenu = window.location.hash.replace(/^#/, "");
+      if (currentMenu && menuData[currentMenu]) renderMenu(currentMenu);
+    }
+
+    document.getElementById("btn-back").addEventListener("click", closeMenu);
+    cartOpen.addEventListener("click", openCart);
+    cartClose.addEventListener("click", closeCart);
+    cartModal.addEventListener("click", (event) => {
+      if (event.target === cartModal) closeCart();
+    });
+    itemConfigCancel.addEventListener("click", closeItemConfig);
+    itemConfigModal.addEventListener("click", (event) => {
+      if (event.target === itemConfigModal) closeItemConfig();
+    });
+    itemConfigOptions.addEventListener("click", (event) => {
+      const choiceBtn = event.target.closest(".item-config-choice");
+      if (!choiceBtn || !pendingCartItem) return;
+
+      if (choiceBtn.dataset.flavorIndex !== undefined) {
+        const flavor = pendingCartItem.flavors[Number(choiceBtn.dataset.flavorIndex)];
+        if (!flavor) return;
+        if (pendingCartItem.optionText) {
+          renderToppingStep(flavor);
+        } else {
+          finishConfiguredItem(pendingCartItem.selectedChoice || null, false, flavor, null);
+        }
+        return;
+      }
+
+      const choice = pendingCartItem.choices[Number(choiceBtn.dataset.choiceIndex)];
+      if (!choice) return;
+
+      if (pendingCartItem.optionText) {
+        renderOptionStep(choice);
+      } else {
+        finishConfiguredItem(choice, false);
+      }
+    });
+    itemConfigActions.addEventListener("click", (event) => {
+      const actionBtn = event.target.closest(".item-config-action");
+      if (!actionBtn || !pendingCartItem) return;
+
+      if (actionBtn.dataset.toppingChoice !== undefined) {
+        const topping = actionBtn.dataset.toppingChoice === "no"
+          ? null
+          : { label: actionBtn.dataset.toppingChoice };
+        finishConfiguredItem(
+          pendingCartItem.selectedChoice || null,
+          Boolean(topping),
+          pendingCartItem.selectedFlavor || null,
+          topping
+        );
+        return;
+      }
+
+      finishConfiguredItem(
+        pendingCartItem.selectedChoice || null,
+        actionBtn.dataset.optionChoice === "yes",
+        pendingCartItem.selectedFlavor || null,
+        null
+      );
+    });
+    cartForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!cartItems.length) {
+        cartStatus.textContent = "Ajoutez au moins un produit au panier.";
+        return;
+      }
+      const formData = new FormData(cartForm);
+      const nom = String(formData.get("nom") || "").trim();
+      const prenom = String(formData.get("prenom") || "").trim();
+      const delivery = String(formData.get("delivery") || "").trim();
+      const tableNumber = String(formData.get("table_number") || "").trim();
+      const number = String(formData.get("number") || "").trim();
+
+      if (!nom || !prenom) {
+        cartStatus.textContent = "Remplissez le nom et le prénom.";
+        return;
+      }
+
+      if (delivery === "table" && !tableNumber) {
+        cartStatus.textContent = "Remplissez le numéro de table.";
+        return;
+      }
+
+      if (delivery === "takeaway" && !number) {
+        cartStatus.textContent = "Remplissez le numéro.";
+        return;
+      }
+
+      pendingOrder = {
+        nom,
+        prenom,
+        delivery,
+        ...(delivery === "table" ? { tableNumber } : { number }),
+        produits: [...cartItems],
+        total: formatPrice(cartItems.reduce((sum, item) => sum + item.priceValue, 0)),
+      };
+
+      console.log("Commande préparée", pendingOrder);
+      closeCart();
+      showConfirmationPage();
+    });
+    imageModalClose.addEventListener("click", closeImageModal);
+    imageModal.addEventListener("click", (event) => {
+      if (event.target === imageModal) closeImageModal();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && imageModal.classList.contains("is-open")) {
+        closeImageModal();
+      } else if (event.key === "Escape" && cartModal.classList.contains("is-open")) {
+        closeCart();
+      } else if (event.key === "Escape" && itemConfigModal.classList.contains("is-open")) {
+        closeItemConfig();
+      }
+    });
+
+    window.addEventListener("hashchange", () => {
+      const h = window.location.hash.replace(/^#/, "");
+      if (h && menuData[h]) openMenu(h);
+      else closeMenu();
+    });
+
+    applyLanguage();
+    renderCart();
+
+    const initial = window.location.hash.replace(/^#/, "");
+    if (initial && menuData[initial]) {
+      openMenu(initial);
+    }
+  </script>
+  <div class="bottom-orange-bar" aria-hidden="true"></div>
+</body>
+</html>
