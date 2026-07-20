@@ -2194,7 +2194,7 @@ const categoryImages = {
             ${opt}
             ${topping}
             ${previewBtn}
-            ${orderControls({ name: itemName, price: item.price, image: previewSrc, description: itemDesc })}
+            ${BrimoOrder.orderControls({ name: itemName, price: item.price, image: previewSrc, description: itemDesc })}
           </div>
         </article>
       `;
@@ -2220,7 +2220,7 @@ const categoryImages = {
             `<div class="menu-price-row">
               <span class="menu-price-row__label">${esc(localized(p.label))}</span>
               <span class="menu-price-row__value">${esc(p.value)}</span>
-              ${orderControls({ name: rowName + " — " + localized(p.label), price: p.value, image: previewSrc })}
+              ${BrimoOrder.orderControls({ name: rowName + " — " + localized(p.label), price: p.value, image: previewSrc })}
             </div>`
         )
         .join("");
@@ -2325,7 +2325,7 @@ const categoryImages = {
               ${flavorsHtml ? `<div class="flavors">${flavorsHtml}</div>` : ""}
               <div class="price-row">${pricesHtml}</div>
               ${blockExtra ? `<div class="menu-card__option">${esc(blockExtra)}</div>` : ""}
-              ${block.prices.map(p => orderControls({ name: blockName + " — " + localized(p.label), price: p.value, image: previewSrc })).join("")}
+              ${block.prices.map(p => BrimoOrder.orderControls({ name: blockName + " — " + localized(p.label), price: p.value, image: previewSrc })).join("")}
             </div>
           </article>`;
         });
