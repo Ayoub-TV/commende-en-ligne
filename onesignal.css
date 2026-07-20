@@ -1,0 +1,53 @@
+.onesignal-enable-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #e97622;
+  color: #fff;
+  padding: 11px 20px;
+  font: 700 0.82rem Montserrat, system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(233, 118, 34, 0.22);
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.onesignal-enable-btn:hover {
+  background: #c45f15;
+}
+
+.onesignal-enable-btn:focus-visible {
+  outline: 2px solid rgba(233, 118, 34, 0.45);
+  outline-offset: 2px;
+}
+
+.onesignal-enable-btn:disabled,
+.onesignal-enable-btn.is-hidden {
+  display: none;
+}
+
+.onesignal-enable-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 6px;
+}
+
+.onesignal-ios-hint {
+  max-width: 520px;
+  margin: 0 auto 20px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(233, 118, 34, 0.1);
+  border: 1px solid rgba(233, 118, 34, 0.18);
+  color: #5c5c5c;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.onesignal-ios-hint.is-hidden {
+  display: none;
+}
