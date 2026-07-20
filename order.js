@@ -1,3 +1,9 @@
+import { db } from "./firebase-config.js";
+
+import {
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 (function(){
   const KEY='brimo_cart_v1', ORDERS='brimo_orders_v1', CUSTOMER='brimo_customer_v1';
   const money=n=>`${Number(n||0).toFixed(2).replace('.00','')} DH`;
@@ -16,8 +22,66 @@
   function renderCart(){const target=document.querySelector('[data-cart]');if(!target)return;const items=cart(),t=totals(items);if(!items.length){target.innerHTML='<div class="order-card empty"><h2>Votre panier est vide</h2><p>Découvrez notre menu et ajoutez vos envies.</p><a class="button" href="index.html">Voir le menu</a></div>';return}target.innerHTML=`<div class="order-grid"><section class="order-card"><h1>Votre panier</h1>${items.map(x=>`<article class="cart-row"><img src="${x.image||''}" alt=""><div><h3>${x.name}</h3><p>${money(x.price)} l’unité</p><div class="qty"><button data-cart-change="-1" data-key="${encodeURIComponent(x.key)}">−</button><span>${x.quantity}</span><button data-cart-change="1" data-key="${encodeURIComponent(x.key)}">+</button></div><input class="note-input" data-note="${encodeURIComponent(x.key)}" value="${x.note||''}" placeholder="Note pour ce produit (facultatif)"></div><div class="line-total">${money(x.price*x.quantity)}<br><button class="button button--ghost button--danger" data-cart-change="remove" data-key="${encodeURIComponent(x.key)}">Supprimer</button></div></article>`).join('')}<div class="cart-actions"><a class="button button--ghost" href="index.html">Continuer mes achats</a><button class="button button--ghost button--danger" data-clear>Vider le panier</button></div></section><aside class="order-card summary"><h2>Récapitulatif</h2><dl><div><dt>Articles</dt><dd>${t.count}</dd></div><div class="total"><dt>Total</dt><dd>${money(t.total)}</dd></div></dl><a class="button button--wide" href="checkout.html">Passer à la caisse</a></aside></div>`;}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-cart-change]');if(b){const v=b.dataset.cartChange;if(v==='remove'&&!confirm('Retirer ce produit du panier ?'))return;update(decodeURIComponent(b.dataset.key),v==='remove'?'remove':Number(v));renderCart()}if(e.target.closest('[data-clear]')&&confirm('Vider entièrement le panier ?')){setCart([]);renderCart()}});
   document.addEventListener('input',e=>{if(e.target.dataset.note){const items=cart(),x=items.find(x=>x.key===decodeURIComponent(e.target.dataset.note));if(x){x.note=e.target.value;setCart(items)}}});
-  function sendOrder(commande){const orders=read(ORDERS);orders.unshift(commande);save(ORDERS,orders);return Promise.resolve(commande)}
-  function newOrder(customer){const items=cart(),t=totals(items);return {id:'BR-'+Date.now().toString().slice(-6),date:new Date().toISOString(),heure:new Date().toLocaleTimeString('fr-MA',{hour:'2-digit',minute:'2-digit'}),client:customer,products:items,total:t.total,quantity:t.count,status:'NOUVEAU',note:document.querySelector('[name=orderNote]')?.value||''}}
-  window.BrimoOrder={add,cart,setCart,totals,money,price,orderControls,renderCart,sendOrder,newOrder,orders:()=>read(ORDERS),customer:()=>read(CUSTOMER),saveCustomer:v=>save(CUSTOMER,v,true)};window.sendOrder=sendOrder;
-  document.addEventListener('DOMContentLoaded',()=>{if(document.querySelector('[data-cart]'))document.body.classList.add('cart-page');if(/\/(?:index|cart)\.html$/i.test(location.pathname)||/\/$/.test(location.pathname))ensureFab();renderCart()});
+async function sendOrder(commande) {
+  try {
+    const docRef = await addDoc(
+      collection(db, "orders"),
+      commande
+    );
+
+    console.log("Commande envoyée :", docRef.id);
+
+    return docRef.id;
+
+  } catch (error) {
+    console.error("Erreur Firebase :", error);
+    throw error;
+  }
+}
+function newOrder(customer){
+  const items = cart(),
+        t = totals(items);
+
+  return {
+    id:'BR-'+Date.now().toString().slice(-6),
+    date:new Date().toISOString(),
+    heure:new Date().toLocaleTimeString('fr-MA',{
+      hour:'2-digit',
+      minute:'2-digit'
+    }),
+    client:customer,
+    products:items,
+    total:t.total,
+    quantity:t.count,
+    status:'NOUVEAU',
+    note:document.querySelector('[name=orderNote]')?.value||''
+  };
+}
+window.BrimoOrder = {
+  add,
+  cart,
+  setCart,
+  totals,
+  money,
+  price,
+  orderControls,
+  renderCart,
+  sendOrder,
+  newOrder,
+  orders:()=>read(ORDERS),
+  customer:()=>read(CUSTOMER),
+  saveCustomer:v=>save(CUSTOMER,v,true)
+};
+
+window.sendOrder = sendOrder;
+
+document.addEventListener('DOMContentLoaded',()=>{
+  if(document.querySelector('[data-cart]'))
+    document.body.classList.add('cart-page');
+
+  if(/\/(?:index|cart)\.html$/i.test(location.pathname)||/\/$/.test(location.pathname))
+    ensureFab();
+
+  renderCart();
+});
 })();
