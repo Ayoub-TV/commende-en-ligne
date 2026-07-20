@@ -28,4 +28,3 @@ export {
   messaging
 };
 export const db = getFirestore(app);
-export const messaging = getMessaging(app);
