@@ -1,24 +1,478 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Administration — Brimo Chicken</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="order.css"><style>.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:18px 0}.stat{padding:18px}.stat b{display:block;font-size:1.75rem;color:var(--brimo-deep);margin-top:6px}.search-wrap{position:relative;margin:20px 0}.search-wrap span{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#8a8a8a}.search-wrap input{padding-left:42px;max-width:460px}.order-list article{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.order-list article{align-items:flex-start;flex-wrap:wrap}.search-wrap input{max-width:none}}</style></head><body class="order-page"><div class="order-shell"><header class="order-top"><a class="order-brand" href="index.html"><img src="logo brimochicken.jpg" alt="">BRIMO CHICKEN</a><a href="kitchen.html">Vue cuisine →</a></header><main><section class="order-card"><h1>Tableau de bord</h1><p class="muted">Pilotage des commandes enregistrées sur ce navigateur.</p><div class="stats" id="stats"></div></section><section class="order-card" style="margin-top:20px"><h2>Commandes récentes</h2><div class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Rechercher par ID, client ou numéro de table" aria-label="Rechercher une commande"></div><div class="order-list" id="orders"></div></section><section class="order-card" style="margin-top:20px"><h2>Gestion du menu</h2><p class="muted">Les produits et catégories du menu sont actuellement administrés dans <a href="index.html">la page du menu</a>. La connexion Firestore pourra centraliser cette gestion sans changer le parcours client.</p></section></main></div><script type="module">
+<!doctype html>
+<html lang="fr">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Administration • Brimo Chicken</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="order.css">
+
+<style>
+
+:root{
+
+--orange:#e97622;
+--orange-dark:#c45f15;
+--green:#18b35b;
+--bg:#f7f5f2;
+--card:#ffffff;
+--line:#ececec;
+
+}
+
+body{
+
+margin:0;
+background:var(--bg);
+font-family:Montserrat,sans-serif;
+
+}
+
+.order-shell{
+
+width:min(1200px,calc(100% - 30px));
+margin:auto;
+padding:20px 0 50px;
+
+}
+
+.order-top{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+
+}
+
+.order-brand{
+
+display:flex;
+align-items:center;
+gap:12px;
+text-decoration:none;
+color:#111;
+font-weight:700;
+font-size:24px;
+
+}
+
+.order-brand img{
+
+width:55px;
+height:55px;
+border-radius:50%;
+
+}
+
+.stats{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-top:25px;
+
+}
+
+.stat{
+
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+}
+
+.stat small{
+
+display:block;
+color:#666;
+margin-bottom:10px;
+
+}
+
+.stat b{
+
+font-size:32px;
+color:var(--orange);
+
+}
+
+.order-card{
+
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+}
+
+.search-wrap{
+
+margin-top:25px;
+margin-bottom:25px;
+
+}
+
+.search-wrap input{
+
+width:100%;
+padding:15px;
+font-size:16px;
+border-radius:12px;
+border:1px solid #ddd;
+outline:none;
+
+}
+
+.order-list{
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+.order-item{
+
+background:#fafafa;
+border:1px solid var(--line);
+border-radius:16px;
+padding:18px;
+
+}
+
+.order-head{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+
+}
+
+.order-id{
+
+font-size:22px;
+font-weight:700;
+color:var(--orange);
+
+}
+
+.order-total{
+
+font-size:20px;
+font-weight:700;
+color:var(--green);
+
+}
+
+.client{
+
+margin-top:10px;
+line-height:1.8;
+
+}
+
+.products{
+
+margin-top:15px;
+padding-left:18px;
+
+}
+
+.products li{
+
+margin-bottom:8px;
+
+}
+
+.time{
+
+margin-top:15px;
+color:#777;
+
+}
+
+@media(max-width:900px){
+
+.stats{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+.order-head{
+
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="order-shell">
+
+<header class="order-top">
+
+<a class="order-brand" href="index.html">
+
+<img src="logo brimochicken.jpg">
+
+<span>BRIMO CHICKEN</span>
+
+</a>
+
+</header>
+
+<section class="order-card">
+
+<h1>Tableau de bord</h1>
+
+<p>Toutes les commandes sont synchronisées automatiquement avec Firebase.</p>
+
+<div class="stats">
+
+<div class="stat">
+
+<small>Commandes</small>
+
+<b id="statOrders">0</b>
+
+</div>
+
+<div class="stat">
+
+<small>Chiffre d'affaires</small>
+
+<b id="statRevenue">0 DH</b>
+
+</div>
+
+<div class="stat">
+
+<small>Produits vendus</small>
+
+<b id="statProducts">0</b>
+
+</div>
+
+<div class="stat">
+
+<small>Tables</small>
+
+<b id="statTables">0</b>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="order-card" style="margin-top:25px;">
+
+<h2>Commandes</h2>
+
+<div class="search-wrap">
+
+<input
+type="search"
+id="search"
+placeholder="Rechercher une commande...">
+
+</div>
+
+<div id="orders" class="order-list">
+
+</div>
+
+</section>
+<script type="module">
+
 import { db } from "./firebase-config.js";
+
 import {
-  collection,
-  onSnapshot,
-  query,
-  orderBy
+collection,
+query,
+orderBy,
+onSnapshot
+
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-const ordersRef = query(
-  collection(db, "orders"),
-  orderBy("date", "desc")
+const ordersDiv = document.getElementById("orders");
+
+const statOrders = document.getElementById("statOrders");
+const statRevenue = document.getElementById("statRevenue");
+const statProducts = document.getElementById("statProducts");
+const statTables = document.getElementById("statTables");
+
+const search = document.getElementById("search");
+
+let commandes = [];
+
+function afficher(){
+
+const texte = search.value.toLowerCase();
+
+let html="";
+
+let total=0;
+let produits=0;
+let tables=new Set();
+
+const filtre = commandes.filter(c=>{
+
+return (
+
+c.id.toLowerCase().includes(texte)
+
+||
+
+(c.client?.prenom||"").toLowerCase().includes(texte)
+
+||
+
+(c.client?.nom||"").toLowerCase().includes(texte)
+
+||
+
+(c.client?.telephone||"").toLowerCase().includes(texte)
+
+||
+
+String(c.client?.table||"").includes(texte)
+
 );
 
-onSnapshot(ordersRef, (snapshot) => {
+});
 
-  console.log("Connexion à Firebase réussie");
+filtre.forEach(c=>{
 
-  snapshot.forEach((doc) => {
-    console.log(doc.data());
-  });
+total+=Number(c.total||0);
+
+tables.add(c.client?.table);
+
+(c.products||[]).forEach(p=>{
+
+produits+=Number(p.quantity||0);
 
 });
-</script></body></html>
+
+html+=`
+
+<div class="order-item">
+
+<div class="order-head">
+
+<div class="order-id">${c.id}</div>
+
+<div class="order-total">${c.total} DH</div>
+
+</div>
+
+<div class="client">
+
+<b>${c.client?.prenom || ""} ${c.client?.nom || ""}</b><br>
+
+📞 ${c.client?.telephone || ""}<br>
+
+🍽️ Table ${c.client?.table || "-"}
+
+</div>
+
+<ul class="products">
+
+${c.products.map(p=>`
+
+<li>
+
+${p.quantity} × ${p.name}
+
+</li>
+
+`).join("")}
+
+</ul>
+
+<div class="time">
+
+${new Date(c.date).toLocaleString("fr-FR")}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+ordersDiv.innerHTML=html;
+
+statOrders.textContent=filtre.length;
+
+statRevenue.textContent=total.toFixed(2)+" DH";
+
+statProducts.textContent=produits;
+
+statTables.textContent=tables.size;
+
+}
+
+const q=query(
+
+collection(db,"orders"),
+
+orderBy("date","desc")
+
+);
+
+onSnapshot(q,(snap)=>{
+
+commandes=[];
+
+snap.forEach(doc=>{
+
+commandes.push(doc.data());
+
+});
+
+afficher();
+
+});
+
+search.addEventListener("input",afficher);
+
+</script>
+
+</div>
+
+</body>
+
+</html>
