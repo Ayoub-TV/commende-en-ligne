@@ -1,30 +1,17 @@
-// Import Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import {
-  getFirestore,
-  collection,
-  addDoc
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-import { getMessaging } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-messaging.js";
+  getFirestore
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-// Configuration Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDWxL2_N3TKhVeXBoWzSvefrkQE6DaKqws",
-  authDomain: "commende-en-ligne.firebaseapp.com",
-  projectId: "commende-en-ligne",
-  storageBucket: "commende-en-ligne.firebasestorage.app",
-  messagingSenderId: "1070045982976",
-  appId: "1:1070045982976:web:b059f49f1b22a5588ac3e5",
-  measurementId: "G-18V0XFZL0S"
+  apiKey: "AIzaSyDaDQgSr24E2leWvTy3SqCiRWEeBbrG1p0",
+  authDomain: "commende-en-ligne-9dc64.firebaseapp.com",
+  projectId: "commende-en-ligne-9dc64",
+  storageBucket: "commende-en-ligne-9dc64.firebasestorage.app",
+  messagingSenderId: "158847520143",
+  appId: "1:158847520143:web:f9a5145430d82b70794ffa"
 };
 
-// Initialisation
 const app = initializeApp(firebaseConfig);
 
-export {
-  db,
-  collection,
-  addDoc,
-  messaging
-};
 export const db = getFirestore(app);
