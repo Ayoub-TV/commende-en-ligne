@@ -1,3 +1,4 @@
+console.log("order.js chargé");
 import { db } from "./firebase-config.js";
 
 import {
