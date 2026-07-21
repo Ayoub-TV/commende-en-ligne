@@ -56,15 +56,19 @@ if (loginForm) {
 
 const page = location.pathname.split("/").pop();
 
-if (page === "admin.html" || page === "kitchen.html") {
-
+if (
+    page === "admin" ||
+    page === "admin.html" ||
+    page === "kitchen" ||
+    page === "kitchen.html"
+) {
     onAuthStateChanged(auth, (user) => {
 
         if (!user) {
 
             sessionStorage.setItem("redirectAfterLogin", page);
 
-            location.href = "Login.html";
+            location.href = "login.html";
 
         }
 
