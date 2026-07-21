@@ -64,7 +64,7 @@ if (page === "admin.html" || page === "kitchen.html") {
 
             sessionStorage.setItem("redirectAfterLogin", page);
 
-            location.href = "login.html";
+            location.href = "Login.html";
 
         }
 
