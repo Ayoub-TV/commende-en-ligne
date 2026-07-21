@@ -1,77 +1,50 @@
-import { auth } from "./firebase-config.js";
+import { app } from "./firebase-config.js";
 
 import {
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    setPersistence,
-    browserSessionPersistence
+    getAuth,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
-// Session uniquement tant que le navigateur est ouvert
-setPersistence(auth, browserSessionPersistence);
+const auth = getAuth(app);
 
-// ==========================
-// PAGE LOGIN
-// ==========================
-const loginForm = document.getElementById("loginForm");
+const ADMIN_EMAIL = "admin@brimo.ma";
+const KITCHEN_EMAIL = "kitchen@brimo.ma";
 
-if (loginForm) {
+onAuthStateChanged(auth, (user) => {
 
-    loginForm.addEventListener("submit", async (e) => {
+    const page = window.location.pathname.split("/").pop();
 
-        e.preventDefault();
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
 
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+    // Protection Admin
+    if (page === "admin.html") {
 
-        const error = document.getElementById("error");
+        if (user.email !== ADMIN_EMAIL) {
 
-        error.textContent = "";
+            alert("Accès réservé à l'administrateur.");
 
-        try {
+            auth.signOut();
 
-            await signInWithEmailAndPassword(auth, email, password);
-
-            const redirect =
-                sessionStorage.getItem("redirectAfterLogin") ||
-                "admin.html";
-
-            sessionStorage.removeItem("redirectAfterLogin");
-
-            location.href = redirect;
-
-        } catch (err) {
-
-            error.textContent = "Email ou mot de passe incorrect.";
-
+            return;
         }
 
-    });
+    }
 
-}
+    // Protection Cuisine
+    if (page === "kitchen.html") {
 
-// ==========================
-// PROTECTION DES PAGES
-// ==========================
+        if (user.email !== KITCHEN_EMAIL) {
 
-const page = location.pathname.split("/").pop();
+            alert("Accès réservé à la cuisine.");
 
-if (
-    page === "admin" ||
-    page === "admin.html" ||
-    page === "kitchen" ||
-    page === "kitchen.html"
-) {
-    onAuthStateChanged(auth, (user) => {
+            auth.signOut();
 
-        if (!user) {
-
-            sessionStorage.setItem("redirectAfterLogin", page);
-
-            location.href = "login.html";
-
+            return;
         }
 
-    });
+    }
 
-}
+});
