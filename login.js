@@ -24,10 +24,12 @@ form.addEventListener("submit", async (e) => {
         if (email === "admin@test.com") {
 
             location.href = "admin.html";
+            location.href = "admin";
 
         } else if (email === "kitchen@test.com") {
 
             location.href = "kitchen.html";
+            location.href = "kitchen";
 
         }
 
