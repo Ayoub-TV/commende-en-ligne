@@ -1,11 +1,9 @@
-import { app } from "./firebase-config.js";
+import { auth } from "./firebase-config.js";
 
 import {
-    getAuth,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-
-const auth = getAuth(app);
 
 const ADMIN_EMAIL = "admin@test.com";
 const KITCHEN_EMAIL = "kitchen@test.com";
@@ -26,7 +24,7 @@ onAuthStateChanged(auth, (user) => {
 
             alert("Accès réservé à l'administrateur.");
 
-            auth.signOut();
+            signOut(auth);
 
             return;
         }
@@ -40,7 +38,7 @@ onAuthStateChanged(auth, (user) => {
 
             alert("Accès réservé à la cuisine.");
 
-            auth.signOut();
+            signOut(auth);
 
             return;
         }
