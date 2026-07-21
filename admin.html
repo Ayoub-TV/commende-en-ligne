@@ -470,7 +470,18 @@ afficher();
 search.addEventListener("input",afficher);
 
 </script>
+<script type="module">
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+import { app } from "./firebase-config.js";
 
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        window.location.href = "login.html";
+    }
+});
+</script>
 </div>
 
 </body>
