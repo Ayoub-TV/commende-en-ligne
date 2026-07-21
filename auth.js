@@ -7,8 +7,8 @@ import {
 
 const auth = getAuth(app);
 
-const ADMIN_EMAIL = "admin@brimo.ma";
-const KITCHEN_EMAIL = "kitchen@brimo.ma";
+const ADMIN_EMAIL = "admin@test.com";
+const KITCHEN_EMAIL = "kitchen@test.com";
 
 onAuthStateChanged(auth, (user) => {
 
