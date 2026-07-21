@@ -10,7 +10,8 @@ const KITCHEN_EMAIL = "kitchen@test.com";
 
 onAuthStateChanged(auth, (user) => {
 
-    const page = window.location.pathname.split("/").pop();
+    const path = window.location.pathname;
+const page = path.split("/").pop().replace(".html", "");
 
     if (!user) {
         window.location.href = "login.html";
@@ -18,7 +19,7 @@ onAuthStateChanged(auth, (user) => {
     }
 
     // Protection Admin
-    if (page === "admin.html") {
+    if (page === "admin") {
 
         if (user.email !== ADMIN_EMAIL) {
 
@@ -32,7 +33,7 @@ onAuthStateChanged(auth, (user) => {
     }
 
     // Protection Cuisine
-    if (page === "kitchen.html") {
+    if (page === "kitchen") {
 
         if (user.email !== KITCHEN_EMAIL) {
 
