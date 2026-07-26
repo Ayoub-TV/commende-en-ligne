@@ -26,8 +26,10 @@ margin:auto;
 }
 
 .kitchen-head{
+position:relative;
 padding:34px 0 28px;
 border-bottom:1px solid #dedbd7;
+padding-right:60px;
 }
 
 .kitchen-kicker{
@@ -50,6 +52,75 @@ margin:8px 0 0;
 color:#77736e;
 font-size:.86rem;
 }
+
+
+/* =========================
+   MENU TROIS POINTS
+========================= */
+
+.kitchen-menu{
+position:absolute;
+right:0;
+top:30px;
+}
+
+.kitchen-menu-btn{
+width:44px;
+height:44px;
+border:1px solid #ddd8d2;
+border-radius:12px;
+background:#fff;
+font-size:27px;
+line-height:1;
+cursor:pointer;
+color:#333;
+transition:.2s;
+}
+
+.kitchen-menu-btn:hover{
+background:#f0eeeb;
+}
+
+.kitchen-menu-dropdown{
+display:none;
+position:absolute;
+right:0;
+top:52px;
+width:230px;
+background:#fff;
+border:1px solid #e5e1dc;
+border-radius:15px;
+box-shadow:0 12px 30px rgba(0,0,0,.12);
+padding:7px;
+z-index:1000;
+}
+
+.kitchen-menu-dropdown.show{
+display:block;
+}
+
+.kitchen-menu-dropdown button{
+width:100%;
+border:0;
+background:#fff;
+padding:13px;
+border-radius:10px;
+text-align:left;
+font-family:Montserrat,sans-serif;
+font-weight:600;
+font-size:14px;
+cursor:pointer;
+color:#333;
+}
+
+.kitchen-menu-dropdown button:hover{
+background:#f4f3f1;
+}
+
+
+/* =========================
+   COMMANDES
+========================= */
 
 .kitchen-grid{
 display:grid;
@@ -154,7 +225,10 @@ font-size:.78rem;
 letter-spacing:.02em;
 }
 
-/* BOUTON PRÊT */
+
+/* =========================
+   BOUTON PRÊT
+========================= */
 
 .ready-btn{
 margin-top:18px;
@@ -179,6 +253,11 @@ opacity:.6;
 cursor:wait;
 }
 
+
+/* =========================
+   VIDE
+========================= */
+
 .kitchen-empty{
 grid-column:1/-1;
 text-align:center;
@@ -189,6 +268,11 @@ border-radius:18px;
 background:rgba(255,255,255,.55);
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:650px){
 
 .kitchen-shell{
@@ -196,7 +280,7 @@ width:min(100% - 28px,1440px);
 }
 
 .kitchen-head{
-padding:22px 0;
+padding:22px 55px 22px 0;
 }
 
 .kitchen-grid{
@@ -209,15 +293,23 @@ padding-top:20px;
 padding:20px;
 }
 
+.kitchen-menu{
+top:20px;
+right:0;
+}
+
 }
 
 </style>
 
 </head>
 
+
 <body class="order-page">
 
+
 <main class="kitchen-shell">
+
 
 <header class="kitchen-head">
 
@@ -225,13 +317,47 @@ padding:20px;
 BRIMO CHICKEN · KITCHEN DISPLAY
 </span>
 
-<h1>Commandes en cours</h1>
+<h1>
+Commandes en cours
+</h1>
 
 <p>
 Les commandes reçues apparaîtront automatiquement.
 </p>
 
+
+<!-- MENU TROIS POINTS -->
+
+<div class="kitchen-menu">
+
+<button
+type="button"
+id="kitchenMenuBtn"
+class="kitchen-menu-btn"
+aria-label="Menu"
+>
+⋮
+</button>
+
+
+<div
+id="kitchenMenu"
+class="kitchen-menu-dropdown"
+>
+
+<button
+type="button"
+id="clearKitchen"
+>
+🧹 Vider les commandes
+</button>
+
+</div>
+
+</div>
+
 </header>
+
 
 <section
 class="kitchen-grid"
@@ -248,18 +374,23 @@ En attente de nouvelles commandes.
 
 </section>
 
+
 </main>
 
 
-<!-- AFFICHAGE DES COMMANDES -->
+<!-- =========================
+     AFFICHAGE DES COMMANDES
+========================= -->
 
 <script>
 
 (function(){
 
-const tickets = document.getElementById("tickets");
+const tickets =
+document.getElementById("tickets");
 
-const empty = document.getElementById("kitchen-empty");
+const empty =
+document.getElementById("kitchen-empty");
 
 
 const money = n =>
@@ -279,30 +410,109 @@ c => ({
 );
 
 
+/*
+========================================
+COMMANDES MASQUÉES LOCALEMENT
+========================================
+*/
+
+const HIDDEN_KEY =
+"brimo_kitchen_hidden_orders_v1";
+
+
+function getHiddenOrders(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem(HIDDEN_KEY) || "[]"
+);
+
+}catch{
+
+return [];
+
+}
+
+}
+
+
+function saveHiddenOrders(list){
+
+localStorage.setItem(
+HIDDEN_KEY,
+JSON.stringify(list)
+);
+
+}
+
+
+function isHidden(id){
+
+return getHiddenOrders().includes(id);
+
+}
+
+
+function hideOrder(id){
+
+const hidden =
+getHiddenOrders();
+
+if(!hidden.includes(id)){
+
+hidden.push(id);
+
+saveHiddenOrders(hidden);
+
+}
+
+}
+
+
+/*
+========================================
+NOTIFICATION
+========================================
+*/
+
 function playNotification(){
 
 try{
 
-const audio = new Audio("notification.mp3");
+const audio =
+new Audio("notification.mp3");
 
 audio.play().catch(() => {});
 
 }catch(error){
 
-console.log("Notification audio impossible :",error);
+console.log(
+"Notification audio impossible :",
+error
+);
 
 }
 
 }
 
+
+/*
+========================================
+CRÉATION D'UNE COMMANDE
+========================================
+*/
 
 function createCard(order){
 
-const client = order.client || {};
+const client =
+order.client || {};
 
-const products = order.products || [];
+const products =
+order.products || [];
 
-const date = order.date
+const date =
+order.date
 ? new Date(order.date)
 : null;
 
@@ -312,11 +522,14 @@ date && !Number.isNaN(date.getTime())
 : order.date || "";
 
 
-const card = document.createElement("article");
+const card =
+document.createElement("article");
 
-card.className = "ticket";
+card.className =
+"ticket";
 
-card.dataset.orderId = order.firebaseId || "";
+card.dataset.orderId =
+order.firebaseId || "";
 
 
 card.innerHTML = `
@@ -326,17 +539,23 @@ card.innerHTML = `
 <div>
 
 <h2 class="ticket__id">
+
 ${text(order.id || order.firebaseId)}
+
 </h2>
 
 <p class="ticket__table">
+
 Table ${text(client.table || "-")}
+
 </p>
 
 </div>
 
 <strong class="ticket__total">
+
 ${money(order.total)}
+
 </strong>
 
 </div>
@@ -345,15 +564,19 @@ ${money(order.total)}
 <div class="customer">
 
 <strong>
+
 ${text(
 (client.prenom || "") +
 " " +
 (client.nom || "")
 )}
+
 </strong>
 
 <span>
+
 ${text(client.telephone || "")}
+
 </span>
 
 </div>
@@ -376,17 +599,21 @@ ${text(p.name || "")}
 
 ${
 p.note
-? `<small>Note : ${text(p.note)}</small>`
+? `<small>
+Note : ${text(p.note)}
+</small>`
 : ""
 }
 
 </span>
 
 <span>
+
 ${money(
 Number(p.price || 0) *
 Number(p.quantity || 0)
 )}
+
 </span>
 
 </li>
@@ -412,7 +639,7 @@ class="ready-btn"
 data-id="${text(order.firebaseId || "")}"
 >
 
-PRÊT
+✅ PRÊT
 
 </button>
 
@@ -424,15 +651,35 @@ return card;
 }
 
 
+/*
+========================================
+AFFICHER UNE COMMANDE
+========================================
+*/
+
 function receiveOrder(order){
 
 if(!order)
 return;
 
 
+if(!order.firebaseId)
+return;
+
+
+/* Si elle est déjà prête */
+
 if(order.ready === true)
 return;
 
+
+/* Si elle a été vidée */
+
+if(isHidden(order.firebaseId))
+return;
+
+
+/* Éviter les doublons */
 
 if(
 document.querySelector(
@@ -442,7 +689,11 @@ document.querySelector(
 return;
 
 
-empty?.remove();
+const currentEmpty =
+document.getElementById("kitchen-empty");
+
+if(currentEmpty)
+currentEmpty.remove();
 
 
 tickets.prepend(
@@ -455,6 +706,12 @@ playNotification();
 }
 
 
+/*
+========================================
+SUPPRIMER DE L'AFFICHAGE
+========================================
+*/
+
 function removeOrder(firebaseId){
 
 const card =
@@ -462,20 +719,34 @@ document.querySelector(
 `.ticket[data-order-id="${CSS.escape(firebaseId)}"]`
 );
 
-if(card){
-
+if(card)
 card.remove();
+
+
+showEmptyIfNeeded();
 
 }
 
 
-if(
-!tickets.querySelector(".ticket")
-){
+/*
+========================================
+MESSAGE PANIER VIDE
+========================================
+*/
+
+function showEmptyIfNeeded(){
 
 if(
-!document.getElementById("kitchen-empty")
-){
+tickets.querySelector(".ticket")
+)
+return;
+
+
+if(
+document.getElementById("kitchen-empty")
+)
+return;
+
 
 const newEmpty =
 document.createElement("div");
@@ -489,11 +760,10 @@ newEmpty.id =
 newEmpty.textContent =
 "En attente de nouvelles commandes.";
 
-tickets.appendChild(newEmpty);
 
-}
-
-}
+tickets.appendChild(
+newEmpty
+);
 
 }
 
@@ -506,7 +776,11 @@ createCard,
 
 removeOrder,
 
-playNotification
+showEmptyIfNeeded,
+
+playNotification,
+
+hideOrder
 
 };
 
@@ -515,11 +789,14 @@ playNotification
 </script>
 
 
-<!-- FIREBASE -->
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
 
-import { db } from "./firebase-config.js";
+import { db }
+from "./firebase-config.js";
 
 
 import {
@@ -536,11 +813,13 @@ updateDoc,
 
 doc
 
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
-const ordersRef = query(
+const ordersRef =
+query(
 
 collection(db,"orders"),
 
@@ -549,8 +828,19 @@ orderBy("date","desc")
 );
 
 
-const knownOrders = new Set();
+const knownOrders =
+new Set();
 
+
+let firstSnapshot =
+true;
+
+
+/*
+========================================
+ÉCOUTE FIREBASE
+========================================
+*/
 
 onSnapshot(
 
@@ -559,12 +849,16 @@ ordersRef,
 (snapshot) => {
 
 
-snapshot.docChanges().forEach((change) => {
+snapshot.docChanges().forEach(
+(change) => {
 
 
-const firebaseId = change.doc.id;
+const firebaseId =
+change.doc.id;
 
-const data = change.doc.data();
+
+const data =
+change.doc.data();
 
 
 const order = {
@@ -584,9 +878,16 @@ COMMANDE MODIFIÉE
 
 if(change.type === "modified"){
 
+/*
+Si elle devient prête,
+elle disparaît de Kitchen.
+*/
+
 if(order.ready === true){
 
-BrimoKitchen.removeOrder(firebaseId);
+BrimoKitchen.removeOrder(
+firebaseId
+);
 
 }
 
@@ -603,9 +904,13 @@ COMMANDE SUPPRIMÉE DE FIREBASE
 
 if(change.type === "removed"){
 
-BrimoKitchen.removeOrder(firebaseId);
+BrimoKitchen.removeOrder(
+firebaseId
+);
 
-knownOrders.delete(firebaseId);
+knownOrders.delete(
+firebaseId
+);
 
 return;
 
@@ -620,28 +925,95 @@ NOUVELLE COMMANDE
 
 if(change.type === "added"){
 
-if(order.ready === true){
+/*
+Commande déjà prête
+*/
 
+if(order.ready === true)
 return;
+
+
+/*
+Commande masquée avec
+"Vider les commandes"
+*/
+
+if(
+BrimoKitchen &&
+typeof BrimoKitchen.receiveOrder === "function"
+){
+
+if(
+localStorage
+.getItem("brimo_kitchen_hidden_orders_v1")
+){
+
+try{
+
+const hidden =
+JSON.parse(
+localStorage.getItem(
+"brimo_kitchen_hidden_orders_v1"
+) || "[]"
+);
+
+if(hidden.includes(firebaseId))
+return;
+
+}catch{}
+
+}
 
 }
 
 
-if(knownOrders.has(firebaseId)){
+/*
+Éviter les doublons
+*/
 
+if(
+knownOrders.has(firebaseId)
+)
 return;
 
+
+knownOrders.add(
+firebaseId
+);
+
+
+/*
+Afficher la commande
+*/
+
+BrimoKitchen.receiveOrder(
+order
+);
+
+
+/*
+Pas de son pour les commandes
+déjà présentes au premier chargement.
+*/
+
+if(firstSnapshot){
+
+const card =
+document.querySelector(
+`.ticket[data-order-id="${CSS.escape(firebaseId)}"]`
+);
+
+if(card)
+card.remove();
+
 }
-
-
-knownOrders.add(firebaseId);
-
-
-BrimoKitchen.receiveOrder(order);
 
 }
 
 });
+
+
+firstSnapshot = false;
 
 
 },
@@ -665,9 +1037,7 @@ BOUTON PRÊT
 */
 
 document.addEventListener(
-
 "click",
-
 async (e) => {
 
 
@@ -687,7 +1057,8 @@ if(!firebaseId)
 return;
 
 
-button.disabled = true;
+button.disabled =
+true;
 
 button.textContent =
 "⏳ Préparation...";
@@ -714,9 +1085,16 @@ ready:true
 
 
 console.log(
-"Commande marquée comme prête :",
+"Commande prête :",
 firebaseId
 );
+
+
+/*
+La commande est retirée
+automatiquement grâce à
+onSnapshot.
+*/
 
 
 }catch(error){
@@ -728,10 +1106,11 @@ error
 );
 
 
-button.disabled = false;
+button.disabled =
+false;
 
 button.textContent =
-"✅ PRÊT";
+"PRÊT";
 
 
 alert(
@@ -740,14 +1119,177 @@ alert(
 
 }
 
+});
+
+
+/*
+========================================
+MENU TROIS POINTS
+========================================
+*/
+
+const kitchenMenuBtn =
+document.getElementById(
+"kitchenMenuBtn"
+);
+
+const kitchenMenu =
+document.getElementById(
+"kitchenMenu"
+);
+
+const clearKitchen =
+document.getElementById(
+"clearKitchen"
+);
+
+
+/*
+Ouvrir / fermer le menu
+*/
+
+kitchenMenuBtn.addEventListener(
+"click",
+(e) => {
+
+e.stopPropagation();
+
+kitchenMenu.classList.toggle(
+"show"
+);
+
+});
+
+
+/*
+Fermer si on clique ailleurs
+*/
+
+document.addEventListener(
+"click",
+(e) => {
+
+if(
+!e.target.closest(".kitchen-menu")
+){
+
+kitchenMenu.classList.remove(
+"show"
+);
+
 }
 
+});
+
+
+/*
+========================================
+VIDER LES COMMANDES
+========================================
+*/
+
+clearKitchen.addEventListener(
+"click",
+() => {
+
+
+const cards =
+Array.from(
+document.querySelectorAll(".ticket")
 );
+
+
+if(!cards.length){
+
+kitchenMenu.classList.remove(
+"show"
+);
+
+return;
+
+}
+
+
+const confirmation =
+confirm(
+"Vider les commandes affichées sur la cuisine ?\n\nLes commandes resteront enregistrées dans Firebase et resteront visibles dans Admin."
+);
+
+
+if(!confirmation)
+return;
+
+
+/*
+Mémoriser les commandes
+masquées localement.
+*/
+
+cards.forEach(card => {
+
+const id =
+card.dataset.orderId;
+
+if(id){
+
+const hidden =
+JSON.parse(
+localStorage.getItem(
+"brimo_kitchen_hidden_orders_v1"
+) || "[]"
+);
+
+
+if(!hidden.includes(id)){
+
+hidden.push(id);
+
+}
+
+
+localStorage.setItem(
+
+"brimo_kitchen_hidden_orders_v1",
+
+JSON.stringify(hidden)
+
+);
+
+}
+
+});
+
+
+/*
+Retirer visuellement
+les commandes.
+*/
+
+cards.forEach(card =>
+card.remove()
+);
+
+
+BrimoKitchen.showEmptyIfNeeded();
+
+
+kitchenMenu.classList.remove(
+"show"
+);
+
+
+console.log(
+"Commandes masquées uniquement sur Kitchen."
+);
+
+});
 
 </script>
 
 
-<!-- PROTECTION ADMIN / KITCHEN -->
+<!-- =========================
+     AUTHENTIFICATION
+========================= -->
 
 <script
 type="module"
