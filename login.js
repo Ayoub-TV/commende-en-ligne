@@ -28,31 +28,20 @@ form.addEventListener("submit", async (e) => {
 
     try {
 
-        // =====================================================
-        // SESSION PROPRE À CHAQUE ONGLET
-        // =====================================================
-
+        // Une session indépendante pour cet onglet
         await setPersistence(
             auth,
             browserSessionPersistence
         );
 
-
-        // =====================================================
-        // CONNEXION
-        // =====================================================
-
+        // Connexion
         await signInWithEmailAndPassword(
             auth,
             email,
             password
         );
 
-
-        // =====================================================
-        // REDIRECTION
-        // =====================================================
-
+        // Redirection
         if (email === "admin@test.com") {
 
             window.location.href = "admin.html";
@@ -65,16 +54,14 @@ form.addEventListener("submit", async (e) => {
 
             error.textContent =
                 "Ce compte n'a pas accès à cette application.";
-
         }
 
     } catch (err) {
 
-        console.error("Erreur de connexion :", err);
+        console.error(err);
 
         error.textContent =
             "Email ou mot de passe incorrect.";
-
     }
 
 });
