@@ -2,6 +2,8 @@ import { app } from "./firebase-config.js";
 
 import {
     getAuth,
+    setPersistence,
+    browserSessionPersistence,
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
@@ -14,28 +16,64 @@ form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
+    const email = document
+        .getElementById("email")
+        .value
+        .trim()
+        .toLowerCase();
+
     const password = document.getElementById("password").value;
+
+    error.textContent = "";
 
     try {
 
-        await signInWithEmailAndPassword(auth, email, password);
+        // =====================================================
+        // SESSION PROPRE À CHAQUE ONGLET
+        // =====================================================
+
+        await setPersistence(
+            auth,
+            browserSessionPersistence
+        );
+
+
+        // =====================================================
+        // CONNEXION
+        // =====================================================
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        // =====================================================
+        // REDIRECTION
+        // =====================================================
 
         if (email === "admin@test.com") {
 
-            location.href = "admin.html";
-            location.href = "admin";
+            window.location.href = "admin.html";
 
         } else if (email === "kitchen@test.com") {
 
-            location.href = "kitchen.html";
-            location.href = "kitchen";
+            window.location.href = "kitchen.html";
+
+        } else {
+
+            error.textContent =
+                "Ce compte n'a pas accès à cette application.";
 
         }
 
     } catch (err) {
 
-        error.textContent = "Email ou mot de passe incorrect.";
+        console.error("Erreur de connexion :", err);
+
+        error.textContent =
+            "Email ou mot de passe incorrect.";
 
     }
 
