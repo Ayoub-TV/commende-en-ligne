@@ -16,28 +16,26 @@ onAuthStateChanged(auth, (user) => {
         .pop()
         .replace(".html", "");
 
-
-    // =====================================================
+    // ==========================================
     // PAS CONNECTÉ
-    // =====================================================
+    // ==========================================
 
     if (!user) {
 
         if (
-            page !== "login"
+            page !== "login" &&
+            page !== ""
         ) {
-
             window.location.href = "login.html";
-
         }
 
         return;
     }
 
 
-    // =====================================================
-    // ADMIN
-    // =====================================================
+    // ==========================================
+    // PAGE ADMIN
+    // ==========================================
 
     if (page === "admin") {
 
@@ -47,24 +45,19 @@ onAuthStateChanged(auth, (user) => {
                 "Accès réservé à l'administrateur."
             );
 
-            // IMPORTANT :
-            // On NE fait PAS signOut(auth)
-            //
-            // On garde la connexion Firebase
-            // pour que Kitchen reste connecté.
+            // NE PAS faire signOut()
+            // On ne détruit pas la session.
 
-            window.location.href =
-                "kitchen.html";
+            window.location.href = "login.html";
 
             return;
         }
-
     }
 
 
-    // =====================================================
-    // KITCHEN
-    // =====================================================
+    // ==========================================
+    // PAGE KITCHEN
+    // ==========================================
 
     if (page === "kitchen") {
 
@@ -74,15 +67,12 @@ onAuthStateChanged(auth, (user) => {
                 "Accès réservé à la cuisine."
             );
 
-            // IMPORTANT :
-            // On NE fait PAS signOut(auth)
+            // NE PAS faire signOut()
 
-            window.location.href =
-                "admin.html";
+            window.location.href = "login.html";
 
             return;
         }
-
     }
 
 });
