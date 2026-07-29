@@ -1,107 +1,2372 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Cuisine — Brimo Chicken</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+
 <link rel="stylesheet" href="order.css">
+
 <style>
-body{background:#f4f3f1;color:#20201f}.kitchen-shell{width:min(1440px,calc(100% - 48px));margin:auto}.kitchen-head{position:relative;padding:34px 60px 28px 0;border-bottom:1px solid #dedbd7}.kitchen-kicker{display:block;color:#e97622;font-size:.7rem;letter-spacing:.16em;font-weight:700;margin-bottom:7px}.kitchen-head h1{font-size:1.75rem;letter-spacing:.02em;margin:0}.kitchen-head p{margin:8px 0 0;color:#77736e;font-size:.86rem}.kitchen-menu{position:absolute;right:0;top:30px}.kitchen-menu-btn{width:44px;height:44px;border:1px solid #ddd8d2;border-radius:12px;background:#fff;font-size:27px;line-height:1;cursor:pointer;color:#333}.kitchen-menu-btn:hover{background:#f0eeeb}.kitchen-menu-dropdown{display:none;position:absolute;right:0;top:52px;width:230px;background:#fff;border:1px solid #e5e1dc;border-radius:15px;box-shadow:0 12px 30px rgba(0,0,0,.12);padding:7px;z-index:1000}.kitchen-menu-dropdown.show{display:block}.kitchen-menu-dropdown button{width:100%;border:0;background:#fff;padding:13px;border-radius:10px;text-align:left;font-family:Montserrat,sans-serif;font-weight:600;font-size:14px;cursor:pointer;color:#333}.kitchen-menu-dropdown button:hover{background:#f4f3f1}.kitchen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:24px;padding:30px 0 48px}.ticket{min-height:340px;background:#fff;border:1px solid #e5e1dc;border-radius:22px;padding:26px;box-shadow:0 12px 34px rgba(58,45,33,.08);display:flex;flex-direction:column}.ticket:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(58,45,33,.12)}.ticket__head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding-bottom:18px;border-bottom:1px solid #eeeae5}.ticket__id{margin:0;font-size:1.08rem;letter-spacing:.06em;color:#272522}.ticket__table{margin:7px 0 0;color:#77736e;font-size:.86rem}.ticket__total{font-size:1.15rem;color:#8d3f09;white-space:nowrap}.customer{margin:20px 0 15px}.customer strong{display:block;font-size:.96rem;margin-bottom:6px}.customer span{color:#77736e;font-size:.83rem}.ticket ul{list-style:none;margin:0;padding:14px 0;border-top:1px solid #eeeae5;flex:1}.ticket li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;font-size:.89rem;line-height:1.4}.ticket li b{color:#c45f15;margin-right:7px}.ticket li small{display:block;color:#89847e;margin:3px 0 0 23px}.ticket__time{padding-top:15px;border-top:1px solid #eeeae5;color:#77736e;font-size:.78rem}.ready-btn{margin-top:18px;padding:14px;width:100%;border:none;border-radius:14px;background:#18b35b;color:#fff;font-size:16px;font-weight:700;cursor:pointer}.ready-btn:hover{background:#13924b}.ready-btn:disabled{opacity:.6;cursor:wait}.kitchen-empty{grid-column:1/-1;text-align:center;padding:58px 20px;color:#85807a;border:1px dashed #d5d0c9;border-radius:18px;background:rgba(255,255,255,.55)}
-@media(max-width:650px){.kitchen-shell{width:min(100% - 28px,1440px)}.kitchen-head{padding:22px 55px 22px 0}.kitchen-grid{grid-template-columns:1fr;gap:16px;padding-top:20px}.ticket{padding:20px}.kitchen-menu{top:20px}}
+
+body{
+    background:#f4f3f1;
+    color:#20201f;
+}
+
+.kitchen-shell{
+    width:min(1440px,calc(100% - 48px));
+    margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.kitchen-head{
+    position:relative;
+    padding:34px 60px 28px 0;
+    border-bottom:1px solid #dedbd7;
+}
+
+.kitchen-kicker{
+    display:block;
+    color:#e97622;
+    font-size:.7rem;
+    letter-spacing:.16em;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.kitchen-head h1{
+    font-size:1.75rem;
+    letter-spacing:.02em;
+    margin:0;
+}
+
+.kitchen-head p{
+    margin:8px 0 0;
+    color:#77736e;
+    font-size:.86rem;
+}
+
+/* =========================
+   MENU 3 POINTS
+========================= */
+
+.kitchen-menu{
+    position:absolute;
+    right:0;
+    top:30px;
+}
+
+.kitchen-menu-btn{
+    width:44px;
+    height:44px;
+
+    border:1px solid #ddd8d2;
+    border-radius:12px;
+
+    background:#fff;
+
+    font-size:27px;
+    line-height:1;
+
+    cursor:pointer;
+    color:#333;
+}
+
+.kitchen-menu-btn:hover{
+    background:#f0eeeb;
+}
+
+.kitchen-menu-dropdown{
+    display:none;
+
+    position:absolute;
+    right:0;
+    top:52px;
+
+    width:230px;
+
+    background:#fff;
+
+    border:1px solid #e5e1dc;
+    border-radius:15px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+
+    padding:7px;
+
+    z-index:1000;
+}
+
+.kitchen-menu-dropdown.show{
+    display:block;
+}
+
+.kitchen-menu-dropdown button{
+    width:100%;
+
+    border:0;
+    background:#fff;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    text-align:left;
+
+    font-family:Montserrat,sans-serif;
+
+    font-weight:600;
+    font-size:14px;
+
+    cursor:pointer;
+
+    color:#333;
+}
+
+.kitchen-menu-dropdown button:hover{
+    background:#f4f3f1;
+}
+
+/* =========================
+   COMMANDES
+========================= */
+
+.kitchen-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(380px,1fr));
+
+    gap:24px;
+
+    padding:30px 0 48px;
+}
+
+/* =========================
+   CARTE COMMANDE
+========================= */
+
+.ticket{
+    min-height:340px;
+
+    background:#fff;
+
+    border:1px solid #e5e1dc;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    box-shadow:
+    0 12px 34px rgba(58,45,33,.08);
+
+    display:flex;
+    flex-direction:column;
+
+    transition:
+    transform .2s,
+    box-shadow .2s,
+    border-color .2s;
+}
+
+.ticket:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 18px 42px rgba(58,45,33,.12);
+}
+
+/*
+   Quand une commande est prise
+   en préparation, on ajoute
+   une bordure de la couleur choisie.
+*/
+
+.ticket.is-preparing{
+    border:2px solid var(--prep-color,#efa875);
+}
+
+/* =========================
+   ENTÊTE CARTE
+========================= */
+
+.ticket__head{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:18px;
+
+    padding-bottom:18px;
+
+    border-bottom:1px solid #eeeae5;
+}
+
+.ticket__id{
+    margin:0;
+
+    font-size:1.08rem;
+
+    letter-spacing:.06em;
+
+    color:#272522;
+}
+
+.ticket__table{
+    margin:7px 0 0;
+
+    color:#77736e;
+
+    font-size:.86rem;
+}
+
+.ticket__total{
+    font-size:1.15rem;
+
+    color:#8d3f09;
+
+    white-space:nowrap;
+}
+
+/* =========================
+   CLIENT
+========================= */
+
+.customer{
+    margin:20px 0 15px;
+}
+
+.customer strong{
+    display:block;
+
+    font-size:.96rem;
+
+    margin-bottom:6px;
+}
+
+.customer span{
+    color:#77736e;
+
+    font-size:.83rem;
+}
+
+/* =========================
+   PRODUITS
+========================= */
+
+.ticket ul{
+    list-style:none;
+
+    margin:0;
+    padding:14px 0;
+
+    border-top:1px solid #eeeae5;
+
+    flex:1;
+}
+
+.ticket li{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:16px;
+
+    padding:8px 0;
+
+    font-size:.89rem;
+
+    line-height:1.4;
+}
+
+.ticket li b{
+    color:#c45f15;
+
+    margin-right:7px;
+}
+
+.ticket li small{
+    display:block;
+
+    color:#89847e;
+
+    margin:
+    3px 0 0 23px;
+}
+
+/* =========================
+   HEURE
+========================= */
+
+.ticket__time{
+    padding-top:15px;
+
+    border-top:1px solid #eeeae5;
+
+    color:#77736e;
+
+    font-size:.78rem;
+
+    letter-spacing:.02em;
+}
+
+/* =========================
+   BOUTONS
+========================= */
+
+.ticket__actions{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.prep-btn,
+.ready-btn{
+
+    padding:14px;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+/* Préparation */
+
+.prep-btn{
+    background:#e97622;
+}
+
+.prep-btn:hover{
+    background:#cf6114;
+}
+
+/* Prêt */
+
+.ready-btn{
+    background:#18b35b;
+}
+
+.ready-btn:hover{
+    background:#13924b;
+}
+
+.prep-btn:disabled,
+.ready-btn:disabled{
+
+    opacity:.6;
+
+    cursor:wait;
+}
+
+/* =========================
+   INDICATEUR PRÉPARATION
+========================= */
+
+.preparation-marker{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:12px;
+
+    font-size:.78rem;
+
+    color:#77736e;
+}
+
+.preparation-dot{
+
+    width:11px;
+    height:11px;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+    flex:0 0 11px;
+}
+
+.preparation-text{
+
+    font-weight:700;
+
+    color:#4b4844;
+}
+
+/* =========================
+   AUCUNE COMMANDE
+========================= */
+
+.kitchen-empty{
+
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:58px 20px;
+
+    color:#85807a;
+
+    border:1px dashed #d5d0c9;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.55);
+}
+
+/* =========================
+   FENÊTRE COULEURS
+========================= */
+
+.prep-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(32,32,31,.38);
+
+    z-index:3000;
+}
+
+.prep-modal.show{
+    display:flex;
+}
+
+.prep-modal__box{
+
+    width:min(420px,100%);
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    box-shadow:
+    0 24px 70px rgba(0,0,0,.20);
+}
+
+.prep-modal__box h2{
+
+    margin:0;
+
+    font-size:1.2rem;
+
+    color:#272522;
+}
+
+.prep-modal__box p{
+
+    margin:8px 0 20px;
+
+    color:#77736e;
+
+    font-size:.85rem;
+}
+
+/* =========================
+   8 COULEURS
+========================= */
+
+.prep-colors{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:12px;
+}
+
+.prep-color{
+
+    height:58px;
+
+    border:2px solid transparent;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    transition:.18s;
+}
+
+.prep-color:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#272522;
+}
+
+/* Rouge */
+
+.prep-color[data-color="#e53935"]{
+    background:#ffe4e2;
+}
+
+/* Jaune */
+
+.prep-color[data-color="#f4c20d"]{
+    background:#fff4c7;
+}
+
+/* Bleu */
+
+.prep-color[data-color="#1e88e5"]{
+    background:#e1efff;
+}
+
+/* Vert */
+
+.prep-color[data-color="#43a047"]{
+    background:#e2f4e3;
+}
+
+/* Violet */
+
+.prep-color[data-color="#8e44ad"]{
+    background:#f0e4f7;
+}
+
+/* Orange */
+
+.prep-color[data-color="#fb8c00"]{
+    background:#fff0db;
+}
+
+/* Rose */
+
+.prep-color[data-color="#e91e63"]{
+    background:#ffe1ec;
+}
+
+/* Cyan */
+
+.prep-color[data-color="#00acc1"]{
+    background:#dcf7fa;
+}
+
+/* Annuler */
+
+.prep-modal__cancel{
+
+    width:100%;
+
+    margin-top:16px;
+
+    padding:12px;
+
+    border:1px solid #ddd8d2;
+
+    border-radius:13px;
+
+    background:#f7f5f2;
+
+    color:#333;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px){
+
+    .kitchen-shell{
+        width:min(100% - 28px,1440px);
+    }
+
+    .kitchen-head{
+        padding:
+        22px 55px 22px 0;
+    }
+
+    .kitchen-grid{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+
+        padding-top:20px;
+    }
+
+    .ticket{
+        padding:20px;
+    }
+
+    .kitchen-menu{
+        top:20px;
+    }
+
+    .ticket__actions{
+
+        grid-template-columns:1fr;
+    }
+
+    .prep-colors{
+
+        gap:9px;
+    }
+
+}
+
 </style>
+
 </head>
+
+
 <body class="order-page">
+
+
 <main class="kitchen-shell">
+
+
 <header class="kitchen-head">
-<span class="kitchen-kicker">BRIMO CHICKEN · KITCHEN DISPLAY</span>
-<h1>Commandes en cours</h1>
-<p>Les commandes reçues apparaîtront automatiquement.</p>
+
+<span class="kitchen-kicker">
+BRIMO CHICKEN · KITCHEN DISPLAY
+</span>
+
+<h1>
+Commandes en cours
+</h1>
+
+<p>
+Les commandes reçues apparaîtront automatiquement.
+</p>
+
+
+<!-- MENU 3 POINTS -->
+
 <div class="kitchen-menu">
-<button type="button" id="kitchenMenuBtn" class="kitchen-menu-btn" aria-label="Menu">⋮</button>
-<div id="kitchenMenu" class="kitchen-menu-dropdown">
-<button type="button" id="clearKitchen">🧹 Vider les commandes</button>
+
+<button
+type="button"
+id="kitchenMenuBtn"
+class="kitchen-menu-btn"
+aria-label="Menu">
+
+⋮
+
+</button>
+
+
+<div
+id="kitchenMenu"
+class="kitchen-menu-dropdown">
+
+<button
+type="button"
+id="clearKitchen">
+
+🧹 Vider les commandes
+
+</button>
+
 </div>
+
 </div>
+
 </header>
-<section class="kitchen-grid" id="tickets" aria-live="polite">
-<div class="kitchen-empty" id="kitchen-empty">En attente de nouvelles commandes.</div>
+
+
+<section
+class="kitchen-grid"
+id="tickets"
+aria-live="polite">
+
+<div
+class="kitchen-empty"
+id="kitchen-empty">
+
+En attente de nouvelles commandes.
+
+</div>
+
 </section>
+
+
 </main>
 
+
+<!-- =========================
+     FENÊTRE CHOIX COULEUR
+========================= -->
+
+<div
+id="prepModal"
+class="prep-modal"
+aria-hidden="true">
+
+<div
+class="prep-modal__box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="prepModalTitle">
+
+
+<h2 id="prepModalTitle">
+Choisir une couleur
+</h2>
+
+<p>
+Choisis une couleur pour signaler que tu prends cette commande.
+</p>
+
+
+<div class="prep-colors">
+
+
+<!-- 1 ROUGE -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#e53935"
+aria-label="Rouge">
+
+🔴
+
+</button>
+
+
+<!-- 2 JAUNE -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#f4c20d"
+aria-label="Jaune">
+
+🟡
+
+</button>
+
+
+<!-- 3 BLEU -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#1e88e5"
+aria-label="Bleu">
+
+🔵
+
+</button>
+
+
+<!-- 4 VERT -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#43a047"
+aria-label="Vert">
+
+🟢
+
+</button>
+
+
+<!-- 5 VIOLET -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#8e44ad"
+aria-label="Violet">
+
+🟣
+
+</button>
+
+
+<!-- 6 ORANGE -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#fb8c00"
+aria-label="Orange">
+
+🟠
+
+</button>
+
+
+<!-- 7 ROSE -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#e91e63"
+aria-label="Rose">
+
+🩷
+
+</button>
+
+
+<!-- 8 CYAN -->
+
+<button
+type="button"
+class="prep-color"
+data-color="#00acc1"
+aria-label="Cyan">
+
+🩵
+
+</button>
+
+
+</div>
+
+
+<button
+type="button"
+id="prepCancel"
+class="prep-modal__cancel">
+
+Annuler
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     AFFICHAGE DES COMMANDES
+========================= -->
+
 <script>
+
 (function(){
-const tickets=document.getElementById('tickets');
-const HIDDEN_KEY='brimo_kitchen_hidden_orders_v1';
-const money=n=>`${Number(n||0).toFixed(2).replace('.00','')} DH`;
-const text=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function hidden(){try{return JSON.parse(localStorage.getItem(HIDDEN_KEY)||'[]')}catch{return[]}}
-function showEmpty(){if(tickets.querySelector('.ticket')||document.getElementById('kitchen-empty'))return;const e=document.createElement('div');e.className='kitchen-empty';e.id='kitchen-empty';e.textContent='En attente de nouvelles commandes.';tickets.appendChild(e)}
-function playNotification(){try{new Audio('notification.mp3').play().catch(()=>{})}catch{}}
-function createCard(order){
-const client=order.client||{},products=order.products||[],date=order.date?new Date(order.date):null;
-const displayDate=date&&!Number.isNaN(date.getTime())?date.toLocaleDateString('fr-MA'):order.date||'';
-const card=document.createElement('article');card.className='ticket';card.dataset.orderId=order.firebaseId||'';
-card.innerHTML=`<div class="ticket__head"><div><h2 class="ticket__id">${text(order.id||order.firebaseId)}</h2><p class="ticket__table">Table ${text(client.table||'-')}</p></div><strong class="ticket__total">${money(order.total)}</strong></div><div class="customer"><strong>${text((client.prenom||'')+' '+(client.nom||''))}</strong><span>${text(client.telephone||'')}</span></div><ul>${products.map(p=>`<li><span><b>×${text(p.quantity||0)}</b>${text(p.name||'')}${p.note?`<small>Note : ${text(p.note)}</small>`:''}</span><span>${money(Number(p.price||0)*Number(p.quantity||0))}</span></li>`).join('')}</ul><div class="ticket__time">${text(displayDate)} · ${text(order.heure||'')}</div><button type="button" class="ready-btn" data-id="${text(order.firebaseId||'')}">✅ PRÊT</button>`;
-return card;
+
+const tickets =
+document.getElementById('tickets');
+
+const HIDDEN_KEY =
+'brimo_kitchen_hidden_orders_v1';
+
+
+/* =========================
+   OUTILS
+========================= */
+
+const money = n =>
+
+`${Number(n || 0)
+.toFixed(2)
+.replace('.00','')} DH`;
+
+
+const text = v =>
+
+String(v ?? '')
+.replace(
+/[&<>"']/g,
+
+c => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+}[c])
+);
+
+
+/* =========================
+   COMMANDES MASQUÉES
+========================= */
+
+function hidden(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(HIDDEN_KEY)
+            || '[]'
+        );
+
+    }catch{
+
+        return [];
+
+    }
+
 }
-function receiveOrder(order){if(!order||!order.firebaseId||order.ready===true||hidden().includes(order.firebaseId))return;if(document.querySelector(`.ticket[data-order-id="${CSS.escape(order.firebaseId)}"]`))return;document.getElementById('kitchen-empty')?.remove();tickets.prepend(createCard(order));playNotification()}
-function removeOrder(id){document.querySelector(`.ticket[data-order-id="${CSS.escape(id)}"]`)?.remove();showEmpty()}
-window.BrimoKitchen={receiveOrder,removeOrder,showEmpty};
+
+
+/* =========================
+   MESSAGE VIDE
+========================= */
+
+function showEmpty(){
+
+    if(
+        tickets.querySelector('.ticket')
+        ||
+        document.getElementById('kitchen-empty')
+    ){
+
+        return;
+
+    }
+
+
+    const empty =
+    document.createElement('div');
+
+    empty.className =
+    'kitchen-empty';
+
+    empty.id =
+    'kitchen-empty';
+
+    empty.textContent =
+    'En attente de nouvelles commandes.';
+
+    tickets.appendChild(empty);
+
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+function playNotification(){
+
+    try{
+
+        new Audio(
+            'notification.mp3'
+        )
+        .play()
+        .catch(()=>{});
+
+    }catch{}
+
+}
+
+
+/* =========================
+   CRÉER UNE CARTE
+========================= */
+
+function createCard(order){
+
+    const client =
+    order.client || {};
+
+    const products =
+    order.products || [];
+
+
+    const date =
+    order.date
+    ? new Date(order.date)
+    : null;
+
+
+    const displayDate =
+    date &&
+    !Number.isNaN(date.getTime())
+
+    ? date.toLocaleDateString('fr-MA')
+
+    : order.date || '';
+
+
+    const card =
+    document.createElement('article');
+
+
+    card.className =
+    'ticket';
+
+
+    card.dataset.orderId =
+    order.firebaseId || '';
+
+
+    card.innerHTML = `
+
+        <div class="ticket__head">
+
+            <div>
+
+                <h2 class="ticket__id">
+
+                    ${text(
+                        order.id ||
+                        order.firebaseId
+                    )}
+
+                </h2>
+
+                <p class="ticket__table">
+
+                    Table
+                    ${text(
+                        client.table || '-'
+                    )}
+
+                </p>
+
+            </div>
+
+
+            <strong class="ticket__total">
+
+                ${money(order.total)}
+
+            </strong>
+
+        </div>
+
+
+        <div class="customer">
+
+            <strong>
+
+                ${text(
+                    (client.prenom || '')
+                    + ' '
+                    + (client.nom || '')
+                )}
+
+            </strong>
+
+
+            <span>
+
+                ${text(
+                    client.telephone || ''
+                )}
+
+            </span>
+
+        </div>
+
+
+        <ul>
+
+            ${products.map(p => `
+
+                <li>
+
+                    <span>
+
+                        <b>
+
+                            ×${text(
+                                p.quantity || 0
+                            )}
+
+                        </b>
+
+                        ${text(
+                            p.name || ''
+                        )}
+
+                        ${
+                            p.note
+                            ?
+                            `<small>
+                                Note :
+                                ${text(p.note)}
+                            </small>`
+                            :
+                            ''
+                        }
+
+                    </span>
+
+
+                    <span>
+
+                        ${money(
+                            Number(p.price || 0)
+                            *
+                            Number(p.quantity || 0)
+                        )}
+
+                    </span>
+
+                </li>
+
+            `).join('')}
+
+        </ul>
+
+
+        <div class="ticket__time">
+
+            ${text(displayDate)}
+            ·
+            ${text(order.heure || '')}
+
+        </div>
+
+
+        <div class="ticket__actions">
+
+            <button
+            type="button"
+            class="prep-btn"
+            data-id="${text(
+                order.firebaseId || ''
+            )}">
+
+                👨‍🍳 PRÉPARATION
+
+            </button>
+
+
+            <button
+            type="button"
+            class="ready-btn"
+            data-id="${text(
+                order.firebaseId || ''
+            )}">
+
+                ✅ PRÊT
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =========================
+   AJOUTER COMMANDE
+========================= */
+
+function receiveOrder(order){
+
+    if(!order) return;
+
+
+    if(!order.firebaseId)
+        return;
+
+
+    if(order.ready === true)
+        return;
+
+
+    if(
+        order.status === 'ready'
+    )
+        return;
+
+
+    if(
+        hidden()
+        .includes(order.firebaseId)
+    )
+        return;
+
+
+    if(
+        document.querySelector(
+            `.ticket[data-order-id="${CSS.escape(order.firebaseId)}"]`
+        )
+    )
+        return;
+
+
+    document
+    .getElementById(
+        'kitchen-empty'
+    )
+    ?.remove();
+
+
+    tickets.prepend(
+        createCard(order)
+    );
+
+
+    playNotification();
+
+}
+
+
+/* =========================
+   SUPPRIMER CARTE
+========================= */
+
+function removeOrder(id){
+
+    document
+    .querySelector(
+        `.ticket[data-order-id="${CSS.escape(id)}"]`
+    )
+    ?.remove();
+
+
+    showEmpty();
+
+}
+
+
+/* =========================
+   EXPOSER LES FONCTIONS
+========================= */
+
+window.BrimoKitchen = {
+
+    receiveOrder,
+
+    removeOrder,
+
+    showEmpty
+
+};
+
+
 })();
+
 </script>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
-import {db} from './firebase-config.js';
-import {collection,onSnapshot,query,orderBy,updateDoc,doc} from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js';
 
-const ordersRef=query(collection(db,'orders'),orderBy('date','desc'));
-const knownOrders=new Set();
-const HIDDEN_KEY='brimo_kitchen_hidden_orders_v1';
 
-onSnapshot(ordersRef,(snapshot)=>{
- snapshot.docChanges().forEach((change)=>{
-  const firebaseId=change.doc.id;
-  const order={firebaseId,...change.doc.data()};
-  if(change.type==='removed'){BrimoKitchen.removeOrder(firebaseId);knownOrders.delete(firebaseId);return;}
-  if(change.type==='modified'){if(order.ready===true)BrimoKitchen.removeOrder(firebaseId);return;}
-  if(change.type==='added'){
-   if(order.ready===true)return;
-   let hidden=[];try{hidden=JSON.parse(localStorage.getItem(HIDDEN_KEY)||'[]')}catch{}
-   if(hidden.includes(firebaseId))return;
-   if(knownOrders.has(firebaseId))return;
-   knownOrders.add(firebaseId);
-   BrimoKitchen.receiveOrder(order);
-  }
- });
-},(error)=>console.error('Erreur Firebase Kitchen :',error));
+import {
+    db
+}
+from './firebase-config.js';
 
-document.addEventListener('click',async(e)=>{
- const button=e.target.closest('.ready-btn');
- if(!button)return;
- const firebaseId=button.dataset.id;if(!firebaseId)return;
- button.disabled=true;button.textContent='⏳ Préparation...';
- try{await updateDoc(doc(db,'orders',firebaseId),{ready:true});}
- catch(error){console.error(error);button.disabled=false;button.textContent='PRÊT';alert('Impossible de marquer la commande comme prête.');}
-});
 
-const menuBtn=document.getElementById('kitchenMenuBtn');
-const menu=document.getElementById('kitchenMenu');
-const clearBtn=document.getElementById('clearKitchen');
-menuBtn.addEventListener('click',(e)=>{e.stopPropagation();menu.classList.toggle('show')});
-document.addEventListener('click',(e)=>{if(!e.target.closest('.kitchen-menu'))menu.classList.remove('show')});
-clearBtn.addEventListener('click',()=>{
- const cards=[...document.querySelectorAll('.ticket')];
- if(!cards.length){menu.classList.remove('show');return;}
- if(!confirm('Vider les commandes affichées sur la cuisine ?\n\nElles resteront dans Firebase et dans Admin.'))return;
- const hidden=new Set();try{JSON.parse(localStorage.getItem(HIDDEN_KEY)||'[]').forEach(id=>hidden.add(id))}catch{}
- cards.forEach(card=>{if(card.dataset.orderId)hidden.add(card.dataset.orderId)});
- localStorage.setItem(HIDDEN_KEY,JSON.stringify([...hidden]));
- cards.forEach(card=>card.remove());
- BrimoKitchen.showEmpty();menu.classList.remove('show');
-});
+import {
+
+    collection,
+
+    onSnapshot,
+
+    query,
+
+    orderBy,
+
+    updateDoc,
+
+    doc,
+
+    runTransaction,
+
+    deleteField
+
+}
+from
+'https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js';
+
+
+
+/* =========================
+   RÉFÉRENCE COMMANDES
+========================= */
+
+const ordersRef = query(
+
+    collection(
+        db,
+        'orders'
+    ),
+
+    orderBy(
+        'date',
+        'desc'
+    )
+
+);
+
+
+
+const knownOrders =
+new Set();
+
+
+const HIDDEN_KEY =
+'brimo_kitchen_hidden_orders_v1';
+
+
+
+/* =========================
+   MODAL
+========================= */
+
+const prepModal =
+document.getElementById(
+    'prepModal'
+);
+
+
+const prepCancel =
+document.getElementById(
+    'prepCancel'
+);
+
+
+let selectedOrderId =
+null;
+
+
+
+/* =========================
+   OUVRIR MODAL
+========================= */
+
+function openPreparationModal(id){
+
+    selectedOrderId =
+    id;
+
+
+    prepModal.classList.add(
+        'show'
+    );
+
+
+    prepModal.setAttribute(
+        'aria-hidden',
+        'false'
+    );
+
+}
+
+
+/* =========================
+   FERMER MODAL
+========================= */
+
+function closePreparationModal(){
+
+    selectedOrderId =
+    null;
+
+
+    prepModal.classList.remove(
+        'show'
+    );
+
+
+    prepModal.setAttribute(
+        'aria-hidden',
+        'true'
+    );
+
+}
+
+
+prepCancel.addEventListener(
+    'click',
+    closePreparationModal
+);
+
+
+
+prepModal.addEventListener(
+    'click',
+    e => {
+
+        if(
+            e.target ===
+            prepModal
+        ){
+
+            closePreparationModal();
+
+        }
+
+    }
+);
+
+
+
+document.addEventListener(
+    'keydown',
+    e => {
+
+        if(
+            e.key === 'Escape'
+        ){
+
+            closePreparationModal();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   FIRESTORE TEMPS RÉEL
+========================= */
+
+onSnapshot(
+
+    ordersRef,
+
+    snapshot => {
+
+
+        snapshot.docChanges()
+        .forEach(change => {
+
+
+            const firebaseId =
+            change.doc.id;
+
+
+            const order = {
+
+                firebaseId,
+
+                ...change.doc.data()
+
+            };
+
+
+            /* =====================
+               COMMANDE SUPPRIMÉE
+            ===================== */
+
+            if(
+                change.type ===
+                'removed'
+            ){
+
+                BrimoKitchen
+                .removeOrder(
+                    firebaseId
+                );
+
+
+                knownOrders.delete(
+                    firebaseId
+                );
+
+
+                return;
+
+            }
+
+
+            /* =====================
+               COMMANDE MODIFIÉE
+            ===================== */
+
+            if(
+                change.type ===
+                'modified'
+            ){
+
+
+                /*
+                   Si elle est prête,
+                   elle disparaît.
+                */
+
+                if(
+
+                    order.ready === true
+                    ||
+                    order.status ===
+                    'ready'
+
+                ){
+
+                    BrimoKitchen
+                    .removeOrder(
+                        firebaseId
+                    );
+
+
+                    knownOrders.delete(
+                        firebaseId
+                    );
+
+
+                    return;
+
+                }
+
+
+                /*
+                   La commande existe
+                   déjà sur l'écran.
+
+                   On actualise seulement
+                   son état de préparation.
+                */
+
+                const card =
+                document.querySelector(
+
+                    `.ticket[data-order-id="${CSS.escape(firebaseId)}"]`
+
+                );
+
+
+                if(card){
+
+                    updatePreparationCard(
+                        card,
+                        order
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            /* =====================
+               NOUVELLE COMMANDE
+            ===================== */
+
+            if(
+                change.type ===
+                'added'
+            ){
+
+
+                if(
+                    order.ready === true
+                    ||
+                    order.status ===
+                    'ready'
+                ){
+
+                    return;
+
+                }
+
+
+                let hidden = [];
+
+
+                try{
+
+                    hidden =
+                    JSON.parse(
+
+                        localStorage.getItem(
+                            HIDDEN_KEY
+                        )
+                        ||
+                        '[]'
+
+                    );
+
+                }catch{}
+
+
+                if(
+                    hidden.includes(
+                        firebaseId
+                    )
+                ){
+
+                    return;
+
+                }
+
+
+                if(
+                    knownOrders.has(
+                        firebaseId
+                    )
+                ){
+
+                    return;
+
+                }
+
+
+                knownOrders.add(
+                    firebaseId
+                );
+
+
+                BrimoKitchen
+                .receiveOrder(
+                    order
+                );
+
+
+                const card =
+                document.querySelector(
+
+                    `.ticket[data-order-id="${CSS.escape(firebaseId)}"]`
+
+                );
+
+
+                if(card){
+
+                    updatePreparationCard(
+                        card,
+                        order
+                    );
+
+                }
+
+            }
+
+
+        });
+
+    },
+
+
+    error => {
+
+        console.error(
+            'Erreur Firebase Kitchen :',
+            error
+        );
+
+    }
+
+);
+
+
+/* =========================
+   ACTUALISER UNE CARTE
+========================= */
+
+function updatePreparationCard(
+    card,
+    order
+){
+
+    const prepColor =
+    order.preparationColor;
+
+
+    const isPreparing =
+
+        order.status ===
+        'preparing'
+
+        &&
+        typeof prepColor ===
+        'string';
+
+
+    card.classList.toggle(
+        'is-preparing',
+        isPreparing
+    );
+
+
+    if(isPreparing){
+
+
+        card.style.setProperty(
+            '--prep-color',
+            prepColor
+        );
+
+
+        let marker =
+        card.querySelector(
+            '.preparation-marker'
+        );
+
+
+        if(!marker){
+
+            marker =
+            document.createElement(
+                'div'
+            );
+
+
+            marker.className =
+            'preparation-marker';
+
+
+            const actions =
+            card.querySelector(
+                '.ticket__actions'
+            );
+
+
+            if(actions){
+
+                actions.before(
+                    marker
+                );
+
+            }
+
+        }
+
+
+        marker.innerHTML = `
+
+            <span
+            class="preparation-dot"
+            style="
+                background:${prepColor}
+            ">
+
+            </span>
+
+
+            <span
+            class="preparation-text">
+
+                EN PRÉPARATION
+
+            </span>
+
+        `;
+
+
+    }else{
+
+
+        card
+        .querySelector(
+            '.preparation-marker'
+        )
+        ?.remove();
+
+
+        card.style.removeProperty(
+            '--prep-color'
+        );
+
+
+        card.classList.remove(
+            'is-preparing'
+        );
+
+    }
+
+
+    const prepButton =
+    card.querySelector(
+        '.prep-btn'
+    );
+
+
+    if(prepButton){
+
+        prepButton.disabled =
+        isPreparing;
+
+
+        prepButton.textContent =
+
+        isPreparing
+
+        ?
+
+        '👨‍🍳 EN PRÉPARATION'
+
+        :
+
+        '👨‍🍳 PRÉPARATION';
+
+    }
+
+}
+
+
+/* =========================
+   CLICS
+========================= */
+
+document.addEventListener(
+    'click',
+    async e => {
+
+
+        /* =====================
+           PRÉPARATION
+        ===================== */
+
+        const prepButton =
+        e.target.closest(
+            '.prep-btn'
+        );
+
+
+        if(prepButton){
+
+            const firebaseId =
+            prepButton.dataset.id;
+
+
+            if(firebaseId){
+
+                openPreparationModal(
+                    firebaseId
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* =====================
+           CHOIX COULEUR
+        ===================== */
+
+        const colorButton =
+        e.target.closest(
+            '.prep-color'
+        );
+
+
+        if(colorButton){
+
+
+            const firebaseId =
+            selectedOrderId;
+
+
+            const color =
+            colorButton.dataset.color;
+
+
+            if(
+                !firebaseId
+                ||
+                !color
+            ){
+
+                return;
+
+            }
+
+
+            closePreparationModal();
+
+
+            const card =
+            document.querySelector(
+
+                `.ticket[data-order-id="${CSS.escape(firebaseId)}"]`
+
+            );
+
+
+            const prepButtonOnCard =
+            card?.querySelector(
+                '.prep-btn'
+            );
+
+
+            if(prepButtonOnCard){
+
+                prepButtonOnCard.disabled =
+                true;
+
+
+                prepButtonOnCard.textContent =
+                '⏳ Prise en charge...';
+
+            }
+
+
+            try{
+
+
+                /*
+                   TRANSACTION FIRESTORE
+
+                   Cela empêche deux
+                   cuisiniers de prendre
+                   la même commande
+                   exactement au même moment.
+                */
+
+                await runTransaction(
+
+                    db,
+
+                    async transaction => {
+
+
+                        const ref =
+                        doc(
+                            db,
+                            'orders',
+                            firebaseId
+                        );
+
+
+                        const snap =
+                        await transaction.get(
+                            ref
+                        );
+
+
+                        if(
+                            !snap.exists()
+                        ){
+
+                            throw new Error(
+                                'Commande introuvable.'
+                            );
+
+                        }
+
+
+                        const data =
+                        snap.data();
+
+
+                        if(
+                            data.ready === true
+                            ||
+                            data.status ===
+                            'ready'
+                        ){
+
+                            throw new Error(
+                                'Cette commande est déjà prête.'
+                            );
+
+                        }
+
+
+                        if(
+                            data.status ===
+                            'preparing'
+                        ){
+
+                            throw new Error(
+                                'Cette commande est déjà en préparation.'
+                            );
+
+                        }
+
+
+                        transaction.update(
+
+                            ref,
+
+                            {
+
+                                status:
+                                'preparing',
+
+                                preparationColor:
+                                color
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+
+            }catch(error){
+
+
+                console.error(
+                    error
+                );
+
+
+                alert(
+
+                    error.message ===
+                    'Cette commande est déjà en préparation.'
+
+                    ?
+
+                    'Cette commande est déjà prise par un autre cuisinier.'
+
+                    :
+
+                    'Impossible de prendre la commande en préparation.'
+
+                );
+
+
+                if(
+                    prepButtonOnCard
+                ){
+
+                    prepButtonOnCard.disabled =
+                    false;
+
+
+                    prepButtonOnCard.textContent =
+                    '👨‍🍳 PRÉPARATION';
+
+                }
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* =====================
+           PRÊT
+        ===================== */
+
+        const readyButton =
+        e.target.closest(
+            '.ready-btn'
+        );
+
+
+        if(
+            !readyButton
+        ){
+
+            return;
+
+        }
+
+
+        const firebaseId =
+        readyButton.dataset.id;
+
+
+        if(
+            !firebaseId
+        ){
+
+            return;
+
+        }
+
+
+        readyButton.disabled =
+        true;
+
+
+        readyButton.textContent =
+        '⏳ Enregistrement...';
+
+
+        try{
+
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    'orders',
+                    firebaseId
+                ),
+
+                {
+
+                    ready:true,
+
+                    status:'ready',
+
+                    preparationColor:
+                    deleteField()
+
+                }
+
+            );
+
+
+        }catch(error){
+
+
+            console.error(
+                error
+            );
+
+
+            readyButton.disabled =
+            false;
+
+
+            readyButton.textContent =
+            '✅ PRÊT';
+
+
+            alert(
+                'Impossible de marquer la commande comme prête.'
+            );
+
+        }
+
+    }
+
+);
+
+
+/* =========================
+   MENU 3 POINTS
+========================= */
+
+const menuBtn =
+document.getElementById(
+    'kitchenMenuBtn'
+);
+
+
+const menu =
+document.getElementById(
+    'kitchenMenu'
+);
+
+
+const clearBtn =
+document.getElementById(
+    'clearKitchen'
+);
+
+
+
+menuBtn.addEventListener(
+    'click',
+    e => {
+
+        e.stopPropagation();
+
+        menu.classList.toggle(
+            'show'
+        );
+
+    }
+);
+
+
+
+document.addEventListener(
+    'click',
+    e => {
+
+        if(
+            !e.target.closest(
+                '.kitchen-menu'
+            )
+        ){
+
+            menu.classList.remove(
+                'show'
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   VIDER L'ÉCRAN
+========================= */
+
+clearBtn.addEventListener(
+    'click',
+    () => {
+
+
+        const cards =
+        [
+            ...document.querySelectorAll(
+                '.ticket'
+            )
+        ];
+
+
+        if(
+            !cards.length
+        ){
+
+            menu.classList.remove(
+                'show'
+            );
+
+            return;
+
+        }
+
+
+        const confirmed =
+        confirm(
+
+            'Vider les commandes affichées sur la cuisine ?\n\n'
+            +
+            'Elles resteront dans Firebase et dans Admin.'
+
+        );
+
+
+        if(
+            !confirmed
+        ){
+
+            return;
+
+        }
+
+
+        const hidden =
+        new Set();
+
+
+        try{
+
+            JSON.parse(
+
+                localStorage.getItem(
+                    HIDDEN_KEY
+                )
+                ||
+                '[]'
+
+            ).forEach(
+                id =>
+                hidden.add(id)
+            );
+
+        }catch{}
+
+
+        cards.forEach(
+            card => {
+
+                if(
+                    card.dataset.orderId
+                ){
+
+                    hidden.add(
+                        card.dataset.orderId
+                    );
+
+                }
+
+            }
+        );
+
+
+        localStorage.setItem(
+
+            HIDDEN_KEY,
+
+            JSON.stringify(
+                [...hidden]
+            )
+
+        );
+
+
+        cards.forEach(
+            card =>
+            card.remove()
+        );
+
+
+        BrimoKitchen.showEmpty();
+
+
+        menu.classList.remove(
+            'show'
+        );
+
+    }
+
+);
+
 </script>
 
-<script type="module" src="auth.js"></script>
+
+<!-- =========================
+     AUTHENTIFICATION
+========================= -->
+
+<script
+type="module"
+src="auth.js">
+</script>
+
+
 </body>
+
 </html>
