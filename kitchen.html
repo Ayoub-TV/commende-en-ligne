@@ -617,144 +617,10 @@ body{
 }
 
 /* =========================
-   ALERTE NOUVELLE COMMANDE
-   (bannière + compteur + mise en évidence)
-========================= */
-
-/* Bannière glissée depuis le haut */
-.new-order-banner{
-    position:fixed;
-    top:-220px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:5000;
-
-    width:min(480px,calc(100% - 32px));
-
-    background:linear-gradient(135deg,#e97622,#cf6114);
-    color:#fff;
-
-    border-radius:18px;
-    padding:18px 22px;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.28);
-
-    text-align:center;
-
-    transition:top .45s cubic-bezier(.34,1.56,.64,1);
-
-    pointer-events:none;
-}
-
-.new-order-banner.show{
-    top:20px;
-}
-
-.new-order-banner__line{
-    display:block;
-    font-size:.7rem;
-    letter-spacing:.14em;
-    opacity:.85;
-}
-
-.new-order-banner__shop{
-    font-weight:700;
-    font-size:1.05rem;
-    margin:6px 0 2px;
-}
-
-.new-order-banner__title{
-    font-weight:600;
-    font-size:.92rem;
-    margin-bottom:6px;
-}
-
-.new-order-banner__meta{
-    font-size:.86rem;
-    font-weight:600;
-    opacity:.95;
-}
-
-/* Compteur rouge de commandes non vues */
-.new-orders-counter{
-    position:fixed;
-    top:132px;
-    right:20px;
-    z-index:4500;
-
-    display:none;
-    align-items:center;
-    gap:8px;
-
-    background:#fff;
-    border:1px solid #f0c6b3;
-    border-radius:999px;
-
-    padding:10px 16px;
-
-    font-weight:700;
-    font-size:.85rem;
-    color:#c62828;
-
-    box-shadow:0 10px 26px rgba(0,0,0,.14);
-
-    /*
-       Le compteur est purement informatif :
-       il ne doit jamais intercepter les clics
-       destinés aux éléments sous lui
-       (ex: le bouton ⋮ du menu).
-    */
-    pointer-events:none;
-}
-
-.new-orders-counter.show{
-    display:flex;
-}
-
-/* Mise en évidence de la carte d'une commande qui vient d'arriver */
-.ticket.is-new-order{
-    animation:
-        ticketPulse 1s ease-in-out 10,
-        ticketGlow 10s ease-out forwards;
-}
-
-@keyframes ticketPulse{
-    0%,100%{ transform:scale(1); }
-    50%{ transform:scale(1.015); }
-}
-
-@keyframes ticketGlow{
-    0%{
-        box-shadow:
-        0 0 0 4px rgba(233,118,34,.55),
-        0 18px 42px rgba(233,118,34,.35);
-    }
-    85%{
-        box-shadow:
-        0 0 0 4px rgba(233,118,34,.55),
-        0 18px 42px rgba(233,118,34,.35);
-    }
-    100%{
-        box-shadow:
-        0 12px 34px rgba(58,45,33,.08);
-    }
-}
-
-/* =========================
    MOBILE
 ========================= */
 
 @media(max-width:650px){
-
-    .new-order-banner{
-        width:calc(100% - 24px);
-    }
-
-    .new-orders-counter{
-        top:96px;
-        right:14px;
-    }
-
 
     .kitchen-shell{
         width:min(100% - 28px,1440px);
@@ -800,39 +666,6 @@ body{
 
 
 <body class="order-page">
-
-
-<!-- =========================
-     ALERTE NOUVELLE COMMANDE
-     (bannière + compteur rouge)
-========================= -->
-
-<div
-id="newOrderBanner"
-class="new-order-banner"
-role="status"
-aria-live="assertive">
-
-<span class="new-order-banner__line">━━━━━━━━━━━━━━━━━━━━━━</span>
-
-<div class="new-order-banner__shop">🍔 BRIMO CHICKEN</div>
-
-<div class="new-order-banner__title">Nouvelle commande !</div>
-
-<div class="new-order-banner__meta" id="newOrderBannerMeta"></div>
-
-<span class="new-order-banner__line">━━━━━━━━━━━━━━━━━━━━━━</span>
-
-</div>
-
-
-<div
-id="newOrdersCounter"
-class="new-orders-counter">
-
-🔴 <span id="newOrdersCounterValue">0</span> nouvelle(s) commande(s)
-
-</div>
 
 
 <main class="kitchen-shell">
@@ -1155,141 +988,20 @@ function showEmpty(){
 
 
 /* =========================
-   NOTIFICATION SONORE
-   (instance réutilisée + déblocage
-   au premier clic/touch, requis par
-   les navigateurs mobiles type iPhone)
+   NOTIFICATION
 ========================= */
-
-let notificationAudio = null;
-let audioUnlocked = false;
-
-function getNotificationAudio(){
-
-    if(!notificationAudio){
-
-        notificationAudio =
-        new Audio('notification.mp3');
-
-        notificationAudio.preload =
-        'auto';
-
-    }
-
-    return notificationAudio;
-
-}
-
-/*
-   Les navigateurs mobiles bloquent
-   la lecture audio tant qu'aucune
-   interaction utilisateur n'a eu lieu.
-   On débloque le son dès le premier
-   clic/toucher sur la page.
-*/
-
-function unlockAudio(){
-
-    if(audioUnlocked) return;
-
-    audioUnlocked = true;
-
-    const audio =
-    getNotificationAudio();
-
-    audio.muted = true;
-
-    audio.play()
-    .then(() => {
-
-        audio.pause();
-        audio.currentTime = 0;
-        audio.muted = false;
-
-    })
-    .catch(() => {
-
-        audio.muted = false;
-
-    });
-
-}
-
-document.addEventListener(
-    'click',
-    unlockAudio,
-    { once:true }
-);
-
-document.addEventListener(
-    'touchstart',
-    unlockAudio,
-    { once:true, passive:true }
-);
-
 
 function playNotification(){
 
-    const audio =
-    getNotificationAudio();
-
     try{
 
-        audio.currentTime = 0;
+        new Audio(
+            'notification.mp3'
+        )
+        .play()
+        .catch(()=>{});
 
-        audio.play()
-        .catch(() => {
-
-            /*
-               MÉTHODE DE SECOURS
-               Si la lecture est bloquée,
-               on tente avec une nouvelle
-               instance indépendante.
-            */
-
-            try{
-
-                new Audio('notification.mp3')
-                .play()
-                .catch(()=>{});
-
-            }catch{}
-
-        });
-
-    }catch{
-
-        try{
-
-            new Audio('notification.mp3')
-            .play()
-            .catch(()=>{});
-
-        }catch{}
-
-    }
-
-}
-
-
-/* =========================
-   VIBRATION
-   300ms · pause 150ms · 300ms
-========================= */
-
-function vibrateNewOrder(){
-
-    if('vibrate' in navigator){
-
-        try{
-
-            navigator.vibrate(
-                [300,150,300]
-            );
-
-        }catch{}
-
-    }
+    }catch{}
 
 }
 
@@ -1490,179 +1202,6 @@ function createCard(order){
 
 
 /* =========================
-   BANNIÈRE NOUVELLE COMMANDE
-   (glisse depuis le haut, disparaît
-   automatiquement après 6 secondes)
-========================= */
-
-const newOrderBanner =
-document.getElementById('newOrderBanner');
-
-const newOrderBannerMeta =
-document.getElementById('newOrderBannerMeta');
-
-let bannerTimeout = null;
-
-function showNewOrderBanner(order){
-
-    if(
-        !newOrderBanner
-        ||
-        !newOrderBannerMeta
-    ) return;
-
-    const client =
-    order.client || {};
-
-    newOrderBannerMeta.textContent =
-
-        `Commande #${
-            order.id || order.firebaseId || ''
-        } · Table ${
-            client.table || '-'
-        }`;
-
-    newOrderBanner.classList.add('show');
-
-    clearTimeout(bannerTimeout);
-
-    bannerTimeout = setTimeout(() => {
-
-        newOrderBanner.classList.remove('show');
-
-    }, 6000);
-
-}
-
-
-/* =========================
-   MISE EN ÉVIDENCE DE LA CARTE
-   (pulse + ombre orange pendant 10s)
-========================= */
-
-function highlightNewOrder(card){
-
-    if(!card) return;
-
-    card.classList.remove('is-new-order');
-
-    // Force le reflow pour pouvoir
-    // relancer l'animation à chaque fois.
-    void card.offsetWidth;
-
-    card.classList.add('is-new-order');
-
-    setTimeout(() => {
-
-        card.classList.remove('is-new-order');
-
-    }, 10000);
-
-}
-
-
-/* =========================
-   DÉFILEMENT AUTOMATIQUE
-   vers la nouvelle commande
-========================= */
-
-function scrollToNewOrder(card){
-
-    if(!card) return;
-
-    card.scrollIntoView({
-        behavior:'smooth',
-        block:'center'
-    });
-
-}
-
-
-/* =========================
-   COMPTEUR ROUGE
-   DE NOUVELLES COMMANDES
-========================= */
-
-const newOrdersCounterEl =
-document.getElementById('newOrdersCounter');
-
-const newOrdersCounterValueEl =
-document.getElementById('newOrdersCounterValue');
-
-const newOrderIds =
-new Set();
-
-function updateNewOrdersCounter(){
-
-    if(
-        !newOrdersCounterEl
-        ||
-        !newOrdersCounterValueEl
-    ) return;
-
-    const total =
-    newOrderIds.size;
-
-    newOrdersCounterValueEl.textContent =
-    total;
-
-    newOrdersCounterEl.classList.toggle(
-        'show',
-        total > 0
-    );
-
-}
-
-function registerNewOrder(id){
-
-    if(!id) return;
-
-    newOrderIds.add(id);
-
-    updateNewOrdersCounter();
-
-}
-
-function acknowledgeOrder(id){
-
-    if(
-        !id
-        ||
-        !newOrderIds.has(id)
-    ) return;
-
-    newOrderIds.delete(id);
-
-    updateNewOrdersCounter();
-
-}
-
-/*
-   Quand le cuisinier clique sur une
-   commande (carte, bouton préparation
-   ou bouton prêt), le compteur diminue.
-*/
-
-tickets.addEventListener(
-    'click',
-    e => {
-
-        const card =
-        e.target.closest('.ticket');
-
-        if(card?.dataset.orderId){
-
-            acknowledgeOrder(
-                card.dataset.orderId
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================
    AJOUTER COMMANDE
 ========================= */
 
@@ -1707,27 +1246,12 @@ function receiveOrder(order){
     ?.remove();
 
 
-    const card =
-    createCard(order);
+    tickets.prepend(
+        createCard(order)
+    );
 
-
-    tickets.prepend(card);
-
-
-    /*
-       ORCHESTRATION DE L'ALERTE
-       PROFESSIONNELLE
-       (son, vibration, bannière,
-       mise en évidence, scroll,
-       compteur rouge)
-    */
 
     playNotification();
-    vibrateNewOrder();
-    showNewOrderBanner(order);
-    highlightNewOrder(card);
-    scrollToNewOrder(card);
-    registerNewOrder(order.firebaseId);
 
 }
 
